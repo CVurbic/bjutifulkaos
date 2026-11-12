@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faza 7 · Slike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@900&family=Red+Hat+Text:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --base: #f1efec; --ink: #231f20; --muted: #5e5a5b; --teal: #65c4b8; --r-photo: 8px; --ease: cubic-bezier(.16,1,.3,1); }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--base); color: var(--ink); font: 400 1rem/1.55 'Red Hat Text', sans-serif; }
+  .ctl { position: sticky; top: 0; z-index: 10; background: var(--ink); color: var(--base); font: .85rem/1.3 system-ui, sans-serif; }
+  .ctl .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 16px; max-width: 1200px; margin: 0 auto; }
+  .ctl button { font: inherit; padding: 8px 12px; border-radius: 8px; border: 1px solid #fff4; background: transparent; color: inherit; cursor: pointer; }
+  .ctl button[aria-pressed="true"] { background: var(--base); color: var(--ink); }
+  .ctl .desc { flex-basis: 100%; opacity: .85; }
+  main { max-width: 1200px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font: 900 2rem/1.1 'Red Hat Display', sans-serif; margin-bottom: 8px; }
+  .note { color: var(--muted); max-width: 64ch; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+  figure { margin: 0; }
+  .ph { overflow: hidden; border-radius: var(--r-photo); aspect-ratio: var(--ratio, 1); background: #0000000d; }
+  .ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% var(--fy, 22%); display: block; filter: var(--f); transition: filter .4s var(--ease); }
+  figcaption { font-size: .75rem; color: var(--muted); margin-top: 4px; font-variant-numeric: tabular-nums; }
+  [data-t="a"] { --f: none; }
+  [data-t="b"] { --f: saturate(.9) contrast(1.06) brightness(1.03) sepia(.07); }
+  [data-t="c"] { --f: grayscale(1) contrast(1.08) brightness(1.04); }
+  [data-t="c"] figure:hover img { --f: saturate(.9) contrast(1.06) brightness(1.03) sepia(.07); }
+  [data-r="1"] { --ratio: 1; } [data-r="45"] { --ratio: 4/5; }
+</style>
+</head>
+<body data-t="b" data-r="1">
+<div class="ctl"><div class="wrap">
+  <b>Obrada</b>
+  <span role="group" aria-label="Obrada">
+    <button data-t="a">A · Original</button><button data-t="b">B · Ujednačeno</button><button data-t="c">C · Tinta</button>
+  </span>
+  <b>Rez</b>
+  <span role="group" aria-label="Rez">
+    <button data-r="1">1:1</button><button data-r="45">4:5</button>
+  </span>
+  <span class="desc" id="desc"></span>
+</div></div>
+<main>
+  <h1>Faza 7: slike</h1>
+  <p class="note">Svih 12 fotki iz <code>resursi/</code> (1,6 MB ukupno). Obrada je ovdje samo pregled preko CSS-a; u pravoj stranici "upečemo" odabranu obradu i rez u same datoteke.</p>
+  <div class="grid" id="grid"></div>
+</main>
+<script>
+  const files = ['1753878112_3688119374154055571','1753878112_3688119374154122752','1753878112_3688119374154251962','1762154497_3757546729386855462','1764054580_3773485780807739970','1764224865_3774914232396077071','1768028501_3806821443263057334','1770188386_3824939841847069172','1770619695_3828557928957769141','1789713254_3988725806485551032','1789713254_3988725809111129309','1793171956_4017740007073810425'];
+  const desc = {
+    a: 'A · Original: fotke kakve jesu s Instagrama. Različita svjetla i boje zidova.',
+    b: 'B · Ujednačeno: malo manje zasićenja, malo više kontrasta i trunka topline (prema podlozi Kamen). Fotke izgledaju kao jedan set, psi ostaju u boji.',
+    c: 'C · Tinta: crno-bijelo kao logo; boja se vrati kad prijeđeš mišem / dotakneš. Najjače veže uz logo, ali gubi se boja dlake.'
+  };
+  // Per-photo vertical focus where the default 22% crops the head.
+  const FOCUS = { 10: '0%' };
+  document.getElementById('grid').innerHTML = files.map((f, i) => `<figure style="${FOCUS[i] ? '--fy:' + FOCUS[i] : ''}"><div class="ph"><img src="../resursi/bjutiful_kaos_${f}_67534481843.webp" alt="Fotka ${i + 1}" loading="lazy"></div><figcaption>#${i + 1}</figcaption></figure>`).join('');
+  const b = document.body;
+  const sync = () => { document.getElementById('desc').textContent = desc[b.dataset.t];
+    document.querySelectorAll('[data-t]').forEach(x => x.tagName === 'BUTTON' && x.setAttribute('aria-pressed', x.dataset.t === b.dataset.t));
+    document.querySelectorAll('button[data-r]').forEach(x => x.setAttribute('aria-pressed', x.dataset.r === b.dataset.r)); };
+  document.querySelectorAll('button[data-t]').forEach(x => x.onclick = () => { b.dataset.t = x.dataset.t; sync(); });
+  document.querySelectorAll('button[data-r]').forEach(x => x.onclick = () => { b.dataset.r = x.dataset.r; sync(); });
+  sync();
+</script>
+</body>
+</html>

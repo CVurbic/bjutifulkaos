@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faza 1 · Boje</title>
+<style>
+  /* Colours measured from resursi/logo.png (core pixels, anti-aliased edges excluded). */
+  :root {
+    --ink: #231f20;     /* logo black, 16.3% */
+    --grey: #9a999b;    /* paw pad, 1.2% */
+    --teal: #65c4b8; --yellow: #f7c57a; --orange: #ed8663; --red: #d55d4e; /* ~0.14% each */
+    --muted: #5e5a5b;   /* readable grey, derived from ink; logo grey is too light for text */
+    --base: #f1efec;    /* Kamen, chosen 10.11. */
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font: 16px/1.5 system-ui, sans-serif; background: #e4e3e1; color: var(--ink); padding: 32px 16px 64px; }
+  main { max-width: 1040px; margin: 0 auto; display: grid; gap: 40px; }
+  h1 { font-size: 1.75rem; line-height: 1.2; margin-bottom: 8px; }
+  h2 { font-size: 1.2rem; margin-bottom: 10px; }
+  p { max-width: 70ch; }
+  p + p { margin-top: 8px; }
+
+  .bar { display: flex; height: 44px; border-radius: 8px; overflow: hidden; border: 1px solid #cfcdca; }
+  .bar span { display: block; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: .85rem; font-variant-numeric: tabular-nums; }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; border: 1px solid #0002; }
+  .zoom { margin-top: 8px; font-size: .85rem; color: var(--muted); }
+
+  .two { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .two > div { flex: 1 1 320px; }
+  .bases { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+  .bases button { font: inherit; font-size: .9rem; padding: 10px 14px; border-radius: 10px; border: 2px solid transparent; background: var(--b); color: var(--ink); cursor: pointer; box-shadow: 0 1px 3px #0002; }
+  .bases button[aria-pressed="true"] { border-color: var(--ink); }
+  .bases button:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+  .roles { display: grid; gap: 8px; font-size: .9rem; margin-top: 16px; }
+  .role { display: grid; grid-template-columns: 40px 1fr auto; gap: 10px; align-items: center; }
+  .sw { width: 40px; height: 28px; border-radius: 6px; border: 1px solid #0001; }
+  .ratio { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+  /* Phone mock */
+  .phone { width: 360px; max-width: 100%; border: 10px solid #222; border-radius: 28px; overflow: hidden; background: var(--base); position: relative; }
+  .phone header { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; font-size: .8rem; font-weight: 600; }
+  .logo { display: block; width: 62%; margin: 4px auto 0; mix-blend-mode: multiply; } /* PNG has a white ground */
+  .hero { padding: 18px 18px 20px; position: relative; }
+  .hero h3 { font-size: 1.7rem; line-height: 1.1; margin-bottom: 8px; text-wrap: balance; }
+  .hero p { font-size: .92rem; color: var(--muted); margin-bottom: 16px; }
+  .cta { display: block; text-align: center; padding: 14px; border-radius: 10px; font-weight: 700; background: var(--ink); color: var(--base); text-decoration: none; }
+  .photo { display: block; width: 100%; height: 190px; object-fit: cover; }
+  .info { padding: 16px 18px 22px; display: grid; gap: 10px; font-size: .9rem; position: relative; }
+  .info .row { display: flex; justify-content: space-between; border-bottom: 1px solid #0000001a; padding-bottom: 8px; }
+  .info .muted { color: var(--muted); }
+  .splash { position: absolute; pointer-events: none; }
+  .note { font-size: .85rem; color: var(--muted); margin-top: 10px; }
+
+  /* Colour-amount levels: elements below only appear from level 2/3 up. */
+  .phone[data-l="1"] .lv2, .phone:not([data-l="3"]) .lv3 { display: none; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
+  .lang b { padding-bottom: 2px; }
+  .phone[data-l="2"] .lang b, .phone[data-l="3"] .lang b { box-shadow: inset 0 -3px var(--teal); }
+  .phone[data-l="2"] .splash.big { transform: scale(1.4); transform-origin: top right; }
+  .phone[data-l="3"] .splash.big { transform: scale(1.9); transform-origin: top right; }
+  .phone[data-l="3"] .info { background: color-mix(in srgb, var(--yellow) 22%, var(--base)); }
+  .phone[data-l="3"] .hero { background: color-mix(in srgb, var(--teal) 14%, var(--base)); }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: .75rem; font-weight: 700; color: var(--ink); background: color-mix(in srgb, var(--orange) 45%, var(--base)); }
+  .photowrap { position: relative; }
+  .photowrap .splash { z-index: 1; }
+</style>
+</head>
+<body>
+<main>
+  <section>
+    <h1>Faza 1: boje, v2 (iz loga)</h1>
+    <p>Izmjerio sam piksele loga. Podloga je bijela, sve ostalo je crna tinta, a boje šape zauzimaju manje od 1%.</p>
+    <div class="bar" aria-label="Udio boja u logu">
+      <span style="flex:79.7;background:#fff"></span>
+      <span style="flex:16.3;background:var(--ink)"></span>
+      <span style="flex:1.2;background:var(--grey)"></span>
+      <span style="flex:.14;background:var(--teal)"></span>
+      <span style="flex:.15;background:var(--yellow)"></span>
+      <span style="flex:.14;background:var(--orange)"></span>
+      <span style="flex:.15;background:var(--red)"></span>
+    </div>
+    <div class="legend">
+      <span><i style="background:#fff"></i>bijela 79,7%</span>
+      <span><i style="background:var(--ink)"></i>tinta #231f20 16,3%</span>
+      <span><i style="background:var(--grey)"></i>siva #9a999b 1,2%</span>
+      <span><i style="background:var(--teal)"></i>tirkizna #65c4b8 0,14%</span>
+      <span><i style="background:var(--yellow)"></i>žuta #f7c57a 0,15%</span>
+      <span><i style="background:var(--orange)"></i>narančasta #ed8663 0,14%</span>
+      <span><i style="background:var(--red)"></i>crvena #d55d4e 0,15%</span>
+    </div>
+    <p class="zoom">Rubovi slova i mrlje (antialiasing) nisu ubrojani, pa siva u stvarnosti ima 1–3%.</p>
+  </section>
+
+  <section class="two">
+    <div>
+      <h2>Pravilo za web: iste proporcije kao logo</h2>
+      <p><b>~80% podloga</b> (topla, ne čista bijela) · <b>~16% tinta</b> (tekst, glavni gumb, crte) · <b>~3% siva</b> (sporedni tekst, rubovi) · <b>~1% boje šape</b>, samo u mrljama.</p>
+      <p>Boje šape nikad nisu tekst ni velika ploha. Dolaze u parovima/četvorkama kao u šapi: mrlja uz naslov, točkica na aktivnom linku, focus prsten. Logo ostaje kakav je.</p>
+      <p style="margin-top:12px"><b>Podloga: Kamen #f1efec</b> ✓</p>
+      <h2 style="margin-top:20px">Koliko boje šape?</h2>
+      <div class="bases" role="group" aria-label="Količina boje">
+        <button style="--b:var(--base)" data-l="1" aria-pressed="false">~1% svaka (kao logo)</button>
+        <button style="--b:var(--base)" data-l="2" aria-pressed="true">~2–3% svaka ✓</button>
+        <button style="--b:var(--base)" data-l="3" aria-pressed="false">~5% svaka</button>
+      </div>
+      <p class="note">Postoci su približni, za cijelu stranicu. Na 2 i 3 boja raste uglavnom kroz <b>blage tonove</b> (boja pomiješana s podlogom), a pune boje i dalje ostaju samo u mrljama.</p>
+      <div class="roles"></div>
+    </div>
+
+    <div class="phone" data-l="2">
+      <header><span>Nazovi</span><span class="lang"><b>HR</b> / EN</span></header>
+      <img class="logo" src="../resursi/logo.png" alt="Bjutiful Kaos, salon za šišanje i njegu pasa">
+      <div class="hero">
+        <svg class="splash big" style="right:14px;top:6px" width="46" height="40" viewBox="0 0 46 40" aria-hidden="true">
+          <circle cx="12" cy="14" r="7" fill="var(--teal)"/><circle cx="25" cy="8" r="6" fill="var(--yellow)"/><circle cx="36" cy="16" r="6.5" fill="var(--orange)"/><circle cx="33" cy="30" r="5.5" fill="var(--red)"/><circle cx="3" cy="4" r="2" fill="var(--teal)"/><circle cx="43" cy="5" r="1.6" fill="var(--orange)"/>
+        </svg>
+        <h3>Šišanje i njega pasa u Trnju</h3>
+        <p>Ul. grada Vukovara 237A · 5,0 ★ na Googleu</p>
+        <a class="cta" href="#">Nazovi 095 800 8133</a>
+      </div>
+      <div class="photowrap">
+        <img class="photo" src="../resursi/bjutiful_kaos_1753878112_3688119374154055571_67534481843.webp" alt="Pudlica nakon šišanja">
+        <svg class="splash lv3" style="left:12px;bottom:-14px" width="54" height="34" viewBox="0 0 54 34" aria-hidden="true"><circle cx="14" cy="18" r="12" fill="var(--red)"/><circle cx="34" cy="12" r="8" fill="var(--yellow)"/><circle cx="47" cy="22" r="4" fill="var(--teal)"/><circle cx="3" cy="6" r="2.4" fill="var(--orange)"/></svg>
+      </div>
+      <div class="info">
+        <div class="row"><span><i class="dot lv2" style="background:var(--teal)"></i>PON–PET</span><b>08–20</b></div>
+        <div class="row"><span><i class="dot lv2" style="background:var(--orange)"></i>Vikend</span><span class="muted">po dogovoru</span></div>
+        <div class="lv2"><span class="tag">pudlice, šnauceri, koliji…</span></div>
+        <svg class="splash" style="right:16px;bottom:8px" width="22" height="14" viewBox="0 0 22 14" aria-hidden="true"><circle cx="5" cy="8" r="4" fill="var(--yellow)"/><circle cx="15" cy="6" r="3" fill="var(--red)"/><circle cx="20.5" cy="12" r="1.3" fill="var(--teal)"/></svg>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const cx = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+  const rgb = c => { cx.clearRect(0,0,1,1); cx.fillStyle = c; cx.fillRect(0,0,1,1); return [...cx.getImageData(0,0,1,1).data].slice(0,3); };
+  const lum = c => rgb(c).map(v => (v /= 255) <= .03928 ? v/12.92 : ((v+.055)/1.055)**2.4).reduce((s,v,i) => s + v*[.2126,.7152,.0722][i], 0);
+  const ratio = (a,b) => { const [x,y] = [lum(a),lum(b)].sort((p,q) => q-p); return (x+.05)/(y+.05); };
+  const root = document.documentElement;
+  const v = n => getComputedStyle(root).getPropertyValue(n).trim();
+  function table() {
+    const b = v('--base');
+    const rows = [['Tinta: tekst, gumb', v('--ink'), 4.5], ['Sporedni tekst', v('--muted'), 4.5], ['Siva iz loga (samo ukras)', v('--grey'), 0],
+                  ['Tirkizna (samo mrlje)', v('--teal'), 0], ['Žuta (samo mrlje)', v('--yellow'), 0], ['Narančasta (samo mrlje)', v('--orange'), 0], ['Crvena (samo mrlje)', v('--red'), 0]];
+    document.querySelector('.roles').innerHTML = '<b>Kontrast na odabranoj podlozi</b>' + rows.map(([name, c, min]) => {
+      const r = ratio(c, b);
+      return `<div class="role"><span class="sw" style="background:${c}"></span><span>${name}</span><span class="ratio">${r.toFixed(1)}${min ? (r >= min ? ' ✓' : ' ✗') : ''}</span></div>`;
+    }).join('');
+  }
+  document.querySelectorAll('.bases button').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelector('.phone').dataset.l = btn.dataset.l;
+    document.querySelectorAll('.bases button').forEach(x => x.setAttribute('aria-pressed', x === btn));
+  }));
+  table();
+</script>
+</body>
+</html>

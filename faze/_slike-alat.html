@@ -1,0 +1,27 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Alat: obrada fotki</title>
+<pre id="log">…</pre>
+<script>
+  // Bakes the phase-7 grade into each photo and saves 480/960/1440 widths as WebP into img/ (via the dev server's PUT).
+  const GRADE = 'saturate(.9) contrast(1.06) brightness(1.03) sepia(.07)';
+  const SRC = ['1753878112_3688119374154055571','1753878112_3688119374154122752','1753878112_3688119374154251962','1762154497_3757546729386855462','1764054580_3773485780807739970','1764224865_3774914232396077071','1768028501_3806821443263057334','1770188386_3824939841847069172','1770619695_3828557928957769141','1789713254_3988725806485551032','1789713254_3988725809111129309','1793171956_4017740007073810425'];
+  const log = t => document.getElementById('log').textContent += '\n' + t;
+  (async () => {
+    const out = [];
+    for (const [i, id] of SRC.entries()) {
+      const img = new Image(); img.src = `../resursi/bjutiful_kaos_${id}_67534481843.webp`; await img.decode();
+      for (const w of [480, 960, 1440]) {
+        const h = Math.round(img.naturalHeight * w / img.naturalWidth);
+        const c = new OffscreenCanvas(w, h), x = c.getContext('2d');
+        x.filter = GRADE; x.imageSmoothingQuality = 'high'; x.drawImage(img, 0, 0, w, h);
+        const blob = await c.convertToBlob({ type: 'image/webp', quality: .8 });
+        const name = `pas-${String(i + 1).padStart(2, '0')}-${w}.webp`;
+        const res = await fetch(`/img/${name}`, { method: 'PUT', body: blob });
+        out.push(`${name} ${w}x${h} ${Math.round(blob.size / 1024)}KB ${res.status}`);
+      }
+      log(`#${i + 1} ok`);
+    }
+    log(out.join('\n')); window.DONE = out;
+  })().catch(e => { log('ERR ' + e); window.DONE = ['ERR ' + e]; });
+</script>

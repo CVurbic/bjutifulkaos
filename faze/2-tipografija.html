@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faza 2 · Tipografija</title>
+<!-- Specimen only: final build self-hosts the chosen files. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;800;900&family=Red+Hat+Text:wght@400;500;700&family=Caveat+Brush&family=Wix+Madefor+Display:wght@700;800&family=Wix+Madefor+Text:wght@400;500;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  /* Phase 1 tokens (faze/ODLUKE.md) */
+  :root { --base: #f1efec; --ink: #231f20; --muted: #5e5a5b; --grey: #9a999b;
+          --teal: #65c4b8; --yellow: #f7c57a; --orange: #ed8663; --red: #d55d4e; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font: 16px/1.5 system-ui, sans-serif; background: #e4e3e1; color: var(--ink); padding: 32px 16px 64px; }
+  .intro { max-width: 70ch; margin: 0 auto 32px; }
+  .intro h1 { font-size: 1.75rem; line-height: 1.2; margin-bottom: 8px; }
+  .intro p + p { margin-top: 8px; }
+  .options { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
+  .opt { width: 360px; max-width: 100%; }
+  .opt > h2 { font: 700 1.2rem/1.3 system-ui, sans-serif; }
+  .opt > .why { font: .9rem/1.45 system-ui, sans-serif; margin: 4px 0 12px; min-height: 5.8em; }
+
+  /* Each option only sets --display/--text + a few weights; the mock is identical. */
+  .phone { border: 10px solid #222; border-radius: 28px; overflow: hidden; background: var(--base); font-family: var(--text); }
+  .phone header { display: flex; justify-content: space-between; padding: 12px 18px; font-size: .85rem; font-weight: 600; }
+  .lang b { box-shadow: inset 0 -3px var(--teal); }
+  .logo { display: block; width: 52%; margin: 0 auto; mix-blend-mode: multiply; }
+  .hero { padding: 16px 18px 20px; position: relative; }
+  .h1 { font-family: var(--display); font-weight: var(--h-w); font-size: var(--h1); line-height: 1.02; letter-spacing: var(--h-ls, 0); margin-bottom: 12px; text-wrap: balance; }
+  .accent { font-family: var(--accent, var(--display)); font-weight: var(--accent-w, inherit); }
+  .lead { font-size: 1rem; line-height: 1.55; color: var(--muted); margin-bottom: 18px; text-wrap: pretty; }
+  .cta { display: block; text-align: center; padding: 15px; border-radius: 10px; background: var(--ink); color: var(--base); text-decoration: none; font-weight: 700; font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+  .sec { padding: 22px 18px; border-top: 1px solid #0000001a; }
+  .h2 { font-family: var(--display); font-weight: var(--h-w); font-size: 1.45rem; line-height: 1.1; margin-bottom: 12px; letter-spacing: var(--h-ls, 0); }
+  .price { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid #0000001a; font-size: 1rem; }
+  .price span:last-child { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ph { color: var(--muted); font-weight: 500 !important; }
+  .meta { font-size: .8rem; color: var(--muted); margin-top: 10px; letter-spacing: .01em; }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 8px; vertical-align: 2px; }
+  .splash { position: absolute; right: 14px; top: 2px; }
+
+  .ladder { margin-top: 16px; font-size: .8rem; display: grid; gap: 4px; }
+  .ladder div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed #0002; padding-bottom: 4px; }
+  .glyphs { font-family: var(--display); font-weight: var(--h-w); font-size: 1.6rem; margin-top: 10px; letter-spacing: .02em; }
+  .glyphs + .glyphs { font-family: var(--text); font-weight: 400; font-size: 1.05rem; margin-top: 2px; }
+
+  .a { --display: 'Red Hat Display', sans-serif; --text: 'Red Hat Text', sans-serif; --h-w: 900; --h1: 2.35rem; --h-ls: -.01em;
+       --accent: 'Caveat Brush', cursive; --accent-w: 400; }
+  .a .accent, .b .accent { font-size: 1.22em; line-height: .8; }
+  .b { --display: 'Wix Madefor Display', sans-serif; --text: 'Wix Madefor Text', sans-serif; --h-w: 800; --h1: 2.2rem; --h-ls: -.015em;
+       --accent: 'Caveat Brush', cursive; --accent-w: 400; }
+  .b .accent { font-size: 1.22em; line-height: .8; }
+  .c { --display: 'Bricolage Grotesque', sans-serif; --text: 'Bricolage Grotesque', sans-serif; --h-w: 800; --h1: 2.45rem; --h-ls: -.025em; }
+  .c .phone { font-variation-settings: 'opsz' 14; }
+  .c .h1, .c .h2, .c .glyphs:first-of-type { font-variation-settings: 'opsz' 96; }
+</style>
+</head>
+<body>
+<section class="intro">
+  <h1>Faza 2: tipografija</h1>
+  <p>Izmjerio sam podnaslov loga ("SALON ZA ŠIŠANJE") impeccableovim font-matchom: geometrijski sans, lagan i širok. "KAOS" je isti tip pisma, samo vrlo debeo. "Bjutiful" je grubi kist.</p>
+  <p>Tri para, iste boje iz faze 1, isti tekst. Svi fontovi imaju hrvatske znakove. Cijene su prazne jer još nisu potvrđene.</p>
+</section>
+
+<div class="options">
+  <article class="opt a">
+    <h2>A · Logo + kist ✓ odabrano</h2>
+    <p class="why">Red Hat Display + Red Hat Text, ista geometrija kao podnaslov loga, naslovi debeli kao "KAOS". Caveat Brush samo za 1–2 riječi u naslovu, kao "Bjutiful".</p>
+    <div class="phone" data-mock></div>
+    <div class="ladder" data-ladder></div>
+  </article>
+
+  <article class="opt b">
+    <h2>B · Kist</h2>
+    <p class="why">Wix Madefor (najbliži izmjereni par podnaslovu) + Caveat Brush za jednu-dvije riječi, kao "Bjutiful" u logu. Kist je samo naglasak, nikad cijela rečenica.</p>
+    <div class="phone" data-mock></div>
+    <div class="ladder" data-ladder></div>
+  </article>
+
+  <article class="opt c">
+    <h2>C · Kaos</h2>
+    <p class="why">Bricolage Grotesque: sans s malo "nereda" u oblicima (koso odrezani krajevi, živahni a/g). Nije kopija loga, nego njegov karakter. Jedna obitelj.</p>
+    <div class="phone" data-mock></div>
+    <div class="ladder" data-ladder></div>
+  </article>
+</div>
+
+<template id="mock">
+  <header><span>Nazovi</span><span class="lang"><b>HR</b> / EN</span></header>
+  <img class="logo" src="../resursi/logo.png" alt="Bjutiful Kaos, salon za šišanje i njegu pasa">
+  <div class="hero">
+    <svg class="splash" width="44" height="38" viewBox="0 0 46 40" aria-hidden="true"><circle cx="12" cy="14" r="7" fill="var(--teal)"/><circle cx="25" cy="8" r="6" fill="var(--yellow)"/><circle cx="36" cy="16" r="6.5" fill="var(--orange)"/><circle cx="33" cy="30" r="5.5" fill="var(--red)"/></svg>
+    <h3 class="h1">Šišanje i njega pasa <span class="accent">u Trnju</span></h3>
+    <p class="lead">Salon u Ulici grada Vukovara 237A. Nazovite i dogovorite termin, radnim danom od 8 do 20 sati.</p>
+    <a class="cta" href="#">Nazovi 095 800 8133</a>
+  </div>
+  <div class="sec">
+    <h4 class="h2">Cijene</h4>
+    <div class="price"><span><i class="dot" style="background:var(--teal)"></i>Mali pas</span><span class="ph">— €</span></div>
+    <div class="price"><span><i class="dot" style="background:var(--yellow)"></i>Srednji pas</span><span class="ph">— €</span></div>
+    <div class="price"><span><i class="dot" style="background:var(--orange)"></i>Veliki pas</span><span class="ph">— €</span></div>
+    <p class="meta">PON–PET 08–20 · vikend po dogovoru</p>
+  </div>
+</template>
+
+<script>
+  const tpl = document.getElementById('mock').innerHTML;
+  document.querySelectorAll('[data-mock]').forEach(m => m.innerHTML = tpl);
+  // Ladder reads computed styles so it always reports what is actually rendered.
+  document.fonts.ready.then(() => document.querySelectorAll('.opt').forEach(opt => {
+    const row = (label, sel) => { const s = getComputedStyle(opt.querySelector(sel)); return `<div><span>${label}</span><span>${s.fontFamily.split(',')[0].replace(/"/g,'')} ${s.fontWeight} · ${parseFloat(s.fontSize)}px</span></div>`; };
+    opt.querySelector('[data-ladder]').innerHTML = row('Naslov', '.h1') + row('Podnaslov', '.h2') + row('Tekst', '.lead') + row('Gumb', '.cta') + row('Sitno', '.meta')
+      + `<p class="glyphs">ŠĐČĆŽ šđčćž</p><p class="glyphs">Pudlica, šnaucer, koli · 095 800 8133</p>`;
+  }));
+</script>
+</body>
+</html>

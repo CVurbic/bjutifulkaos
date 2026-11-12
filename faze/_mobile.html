@@ -1,0 +1,26 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Frames</title>
+<!-- Dev only, for review captures. Lays the page out at a real viewport (w x h) and stacks viewport-sized
+     frames, each scrolled one screen further, so vh units resolve like on a device and the capture ends at the footer.
+     ?u=/&w=1440&h=900   (&measure=1 writes the page height into the title) -->
+<style>html,body{margin:0;background:#888}.cell{overflow:hidden;position:relative}iframe{display:block;border:0;background:#fff}</style>
+<body>
+<script>
+  const p = new URLSearchParams(location.search), u = p.get('u') || '/', w = +p.get('w') || 390, h = +p.get('h') || 844;
+  const frame = () => Object.assign(document.createElement('iframe'), { src: u, width: w, height: h });
+  const first = frame(); document.body.append(first);
+  first.onload = async () => {
+    const d = first.contentDocument; await d.fonts.ready;
+    const H = d.documentElement.scrollHeight;
+    if (p.get('measure')) { document.title = 'H=' + H; return; }
+    first.remove();
+    for (let top = 0; top < H; top += h) {
+      const cell = document.createElement('div'), f = frame(), rem = Math.min(h, H - top);
+      cell.className = 'cell'; cell.style.width = w + 'px'; cell.style.height = rem + 'px';
+      cell.append(f); document.body.append(cell);
+      f.onload = () => { f.contentWindow.scrollTo({ top: Math.min(top, H - h), behavior: 'instant' }); if (rem < h) f.style.marginTop = -(h - rem) + 'px'; };
+    }
+  };
+</script>
+</body>

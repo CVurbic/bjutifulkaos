@@ -1,0 +1,80 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "faze/2-tipografija.html"
+        ],
+        "createdAt": "2026-11-10T14:31:42.236Z",
+        "reason": "Claude: specimen page; mock ramp is 37.6/23.2/16/12.8px (steps 1.62, 1.45, 1.25), flat steps come from annotation chrome around three side-by-side mocks"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "faze/3-spacing.html"
+        ],
+        "createdAt": "2026-11-10T14:42:24.077Z",
+        "reason": "Claude: false positive; .row gets padding-block var(--inner)=12px and .ctl insets via child .wrap padding-block 10px, detector cannot resolve custom properties/nested wrapper"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "faze/4-oblici.html"
+        ],
+        "createdAt": "2026-11-10T14:47:25.932Z",
+        "reason": "Claude: false positive; .ctl bar insets content via child .wrap padding-block 10px (same specimen control bar as faze/3-spacing.html)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "faze/6-pokret.html"
+        ],
+        "createdAt": "2026-11-10T14:58:57.649Z",
+        "reason": "Claude: false positive; specimen .ctl bar insets content via child .wrap padding-block 10px (same as faze/3-spacing.html, faze/4-oblici.html)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-10T15:28:02.480Z",
+        "reason": "Claude: false positive; .band has 16px top padding (desktop 24px+overlap); the flagged top child is the aria-hidden absolutely positioned hero splash that straddles the seam by design (finish review fix #2)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "en/index.html"
+        ],
+        "createdAt": "2026-11-10T15:28:02.824Z",
+        "reason": "Claude: false positive; .band has 16px top padding (desktop 24px+overlap); the flagged top child is the aria-hidden absolutely positioned hero splash that straddles the seam by design (finish review fix #2)"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          "faze/2-tipografija.html"
+        ],
+        "createdAt": "2026-11-10T15:56:46.161Z",
+        "reason": "Claude: faze/ pages are phase specimens showing rejected options side by side (user picked Red Hat + Caveat Brush in phase 2); not shipping surfaces"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          "faze/7-slike.html"
+        ],
+        "createdAt": "2026-11-10T15:56:46.538Z",
+        "reason": "Claude: faze/ pages are phase specimens showing rejected options side by side (user picked Red Hat + Caveat Brush in phase 2); not shipping surfaces"
+      }
+    ]
+  }
+}

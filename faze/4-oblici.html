@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faza 4 · Oblici</title>
+<!-- Specimen only: final build self-hosts the fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@900&family=Red+Hat+Text:wght@400;700&family=Caveat+Brush&display=swap" rel="stylesheet">
+<style>
+  /* Phase 1-3 tokens (faze/ODLUKE.md) */
+  :root {
+    --base: #f1efec; --ink: #231f20; --muted: #5e5a5b; --grey: #9a999b;
+    --teal: #65c4b8; --yellow: #f7c57a; --orange: #ed8663; --red: #d55d4e;
+    --display: 'Red Hat Display', sans-serif; --text: 'Red Hat Text', sans-serif; --brush: 'Caveat Brush', cursive;
+    --gutter: 16px; --inner: 12px; --group: 24px; --section: 48px; --section-photo: 96px; --maxw: 1040px; --col: 52ch;
+  }
+  @media (min-width: 900px) { :root { --gutter: 32px; --section: 64px; --section-photo: 160px; } }
+
+  /* Shape languages: only these tokens change. */
+  [data-s="a"] { --r-btn: 12px; --r-photo: 8px; --r-tag: 999px; --line: 1px solid #0000001f; --shadow: none; --btn-border: none; }
+  [data-s="b"] { --r-btn: 2px;  --r-photo: 0;   --r-tag: 2px;   --line: 1px solid var(--ink); --shadow: none; --btn-border: none; }
+  [data-s="c"] { --r-btn: 999px; --r-photo: 24px; --r-tag: 999px; --line: 1px solid #0000001f; --shadow: 0 10px 28px -12px #231f2059; --btn-border: none; }
+
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--base); color: var(--ink); font: 400 1rem/1.55 var(--text); }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+  section { padding-block: var(--section); }
+  section.photo { padding-block: var(--section-photo); }
+  h1 { font: 900 2.35rem/1.02 var(--display); letter-spacing: -.01em; text-wrap: balance; margin-bottom: var(--inner); }
+  h2 { font: 900 1.45rem/1.1 var(--display); margin-bottom: var(--group); }
+  @media (min-width: 900px) { h1 { font-size: 3.4rem; } h2 { font-size: 1.9rem; } }
+  .brush { font-family: var(--brush); font-weight: 400; font-size: 1.22em; line-height: .8; }
+  p { max-width: var(--col); text-wrap: pretty; }
+  .muted { color: var(--muted); }
+
+  .ctl { position: sticky; top: 0; z-index: 10; background: var(--ink); color: var(--base); font: 400 .85rem/1.3 system-ui, sans-serif; }
+  .ctl .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding-block: 10px; }
+  .ctl b { font-weight: 700; margin-right: 4px; }
+  .ctl button { font: inherit; padding: 8px 12px; border-radius: 8px; border: 1px solid #fff4; background: transparent; color: inherit; cursor: pointer; }
+  .ctl button[aria-pressed="true"] { background: var(--base); color: var(--ink); }
+  .ctl button:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+  .ctl .desc { flex-basis: 100%; opacity: .85; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; padding-block: var(--inner); border-bottom: var(--line); }
+  .top img { width: 92px; mix-blend-mode: multiply; }
+  .top nav { display: flex; gap: 24px; font-size: .9rem; font-weight: 700; }
+  .top nav .on { box-shadow: inset 0 -3px var(--teal); padding-bottom: 4px; }
+
+  .hero { display: grid; gap: var(--group); }
+  .hero .lead { color: var(--muted); margin-bottom: var(--group); }
+  .heading { position: relative; }
+  .cta { display: inline-block; padding: 16px 24px; border-radius: var(--r-btn); background: var(--ink); color: var(--base); text-decoration: none; font-weight: 700; font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+  .cta:hover { background: #3a3435; }
+  .cta:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+  .ghost { display: inline-block; margin-left: 8px; padding: 15px 22px; border-radius: var(--r-btn); border: 1px solid var(--ink); color: var(--ink); text-decoration: none; font-weight: 700; }
+  .hero img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-photo); box-shadow: var(--shadow); }
+  @media (min-width: 900px) { .hero { grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; } .hero img { aspect-ratio: 4/5; } }
+
+  .prices { display: grid; gap: var(--group); }
+  @media (min-width: 900px) { .prices { grid-template-columns: 1fr 1.4fr; } }
+  .row { display: flex; justify-content: space-between; padding-block: var(--inner); border-bottom: var(--line); }
+  .row span:last-child { font-weight: 700; color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--group); }
+  .tag { padding: 6px 12px; border-radius: var(--r-tag); font-size: .85rem; font-weight: 700; background: color-mix(in srgb, var(--c) 40%, var(--base)); }
+
+  .gal { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; }
+  @media (min-width: 900px) { .gal { grid-template-columns: repeat(3, 1fr); } }
+  .gal img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  [data-s="c"] .gal { gap: 12px; padding-inline: 12px; }
+  [data-s="c"] .gal img { border-radius: var(--r-photo); }
+  .gal-head { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gutter); position: relative; }
+
+  .splash { position: absolute; pointer-events: none; overflow: visible; }
+  footer { padding-block: var(--group); border-top: var(--line); font-size: .8rem; color: var(--muted); }
+</style>
+</head>
+<body data-s="a" data-m="2">
+<div class="ctl">
+  <div class="wrap">
+    <span role="group" aria-label="Oblici"><b>Oblici</b>
+      <button data-s="a" aria-pressed="true">A · Meko</button>
+      <button data-s="b" aria-pressed="false">B · Oštro</button>
+      <button data-s="c" aria-pressed="false">C · Kap</button>
+    </span>
+    <span role="group" aria-label="Mrlje"><b>Mrlje</b>
+      <button data-m="1" aria-pressed="true">1 · Točke</button>
+      <button data-m="2" aria-pressed="false">2 · Mrlja iz loga</button>
+      <button data-m="3" aria-pressed="false">3 · Prskanje</button>
+    </span>
+    <span class="desc" id="desc"></span>
+  </div>
+</div>
+
+<div class="wrap"><div class="top">
+  <img src="../resursi/logo.png" alt="Bjutiful Kaos">
+  <nav><span>Cijene</span><span>Galerija</span><span class="on">HR</span><span>EN</span></nav>
+</div></div>
+
+<section>
+  <div class="wrap hero">
+    <div>
+      <div class="heading">
+        <svg class="splash" data-splash="hero" style="right:0;top:-30px" width="80" height="70" viewBox="-40 -35 80 70" aria-hidden="true"></svg>
+        <h1>Šišanje i njega pasa <span class="brush">u Trnju</span></h1>
+      </div>
+      <p class="lead">Salon u Ulici grada Vukovara 237A. Nazovite i dogovorite termin, radnim danom od 8 do 20 sati.</p>
+      <a class="cta" href="#">Nazovi 095 800 8133</a><a class="ghost" href="#">Cijene</a>
+    </div>
+    <img src="../resursi/bjutiful_kaos_1753878112_3688119374154055571_67534481843.webp" alt="Pudlica nakon šišanja">
+  </div>
+</section>
+
+<section>
+  <div class="wrap prices">
+    <div>
+      <h2>Cijene</h2>
+      <p class="muted">Cijena ovisi o veličini psa i stanju dlake. Točne iznose dodajemo kad ih vlasnica potvrdi.</p>
+    </div>
+    <div>
+      <div class="row"><span>Mali pas</span><span>— €</span></div>
+      <div class="row"><span>Srednji pas</span><span>— €</span></div>
+      <div class="row"><span>Veliki pas</span><span>— €</span></div>
+      <div class="tags"><span class="tag" style="--c:var(--teal)">pudlice</span><span class="tag" style="--c:var(--yellow)">šnauceri</span><span class="tag" style="--c:var(--orange)">koliji</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="photo">
+  <div class="gal-head">
+    <svg class="splash" data-splash="gal" style="left:calc(var(--gutter) + 150px);top:-26px" width="70" height="60" viewBox="-35 -30 70 60" aria-hidden="true"></svg>
+    <h2>Iz salona</h2>
+  </div>
+  <div class="gal">
+    <img src="../resursi/bjutiful_kaos_1793171956_4017740007073810425_67534481843.webp" alt="Šnaucer">
+    <img src="../resursi/bjutiful_kaos_1770619695_3828557928957769141_67534481843.webp" alt="Pas nakon šišanja">
+    <img src="../resursi/bjutiful_kaos_1764054580_3773485780807739970_67534481843.webp" alt="Pas nakon šišanja">
+    <img src="../resursi/bjutiful_kaos_1768028501_3806821443263057334_67534481843.webp" alt="Pas nakon šišanja">
+    <img src="../resursi/bjutiful_kaos_1789713254_3988725806485551032_67534481843.webp" alt="Pas nakon šišanja">
+    <img src="../resursi/bjutiful_kaos_1762154497_3757546729386855462_67534481843.webp" alt="Pas nakon šišanja">
+  </div>
+</section>
+
+<footer><div class="wrap">Bjutiful Kaos · salon za šišanje i njegu pasa</div></footer>
+
+<script>
+  const desc = {
+    a: 'A · Meko: gumbi zaobljeni 12px, fotke 8px, oznake kao tablete, tanke sive crte, bez sjena. Prijateljski, neutralno.',
+    b: 'B · Oštro: skoro bez zaobljenja, crte u tinti kao na tiskanom cjeniku. Ozbiljno i grafički; mrlje se jače ističu uz ravne rubove.',
+    c: 'C · Kap: gumbi kao tableta, fotke jako zaobljene s mekom sjenom, galerija s razmacima. Najmekše i "slatko".',
+    1: '1 · Točke: krugovi u bojama šape.',
+    2: '2 · Mrlja iz loga: crna mrlja tinte s jastučićima šape u bojama, kao u logu. Svaka je malo drugačija.',
+    3: '3 · Prskanje: male nepravilne kapi u bojama šape, bez crne.'
+  };
+  // Seeded RNG so each splash is unique but stable between reloads.
+  const rng = s => () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const COLORS = ['var(--teal)', 'var(--yellow)', 'var(--orange)', 'var(--red)'];
+  function blob(r, R, n, spikes) {
+    const pts = Array.from({ length: n }, (_, i) => {
+      const a = i / n * Math.PI * 2, k = spikes && r() < .3 ? 1.35 + r() * .35 : .82 + r() * .3;
+      return [Math.cos(a) * R * k, Math.sin(a) * R * k];
+    });
+    const mid = (p, q) => [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2], f = v => v.toFixed(1);
+    let d = `M${mid(pts[n - 1], pts[0]).map(f)}`;
+    pts.forEach((p, i) => { const m = mid(p, pts[(i + 1) % n]); d += `Q${f(p[0])},${f(p[1])} ${f(m[0])},${f(m[1])}`; });
+    return d + 'Z';
+  }
+  function draw(svg, mode, seed) {
+    const r = rng(seed), out = [];
+    if (mode === '1') {
+      [[-14, -6, 7], [0, -14, 6], [14, -6, 6.5], [11, 9, 5.5], [-24, -18, 2], [24, -20, 1.6]].forEach(([x, y, s], i) => out.push(`<circle cx="${x}" cy="${y}" r="${s}" fill="${COLORS[i % 4]}"/>`));
+    } else if (mode === '2') {
+      out.push(`<path d="${blob(r, 18, 18, true)}" fill="var(--ink)"/>`);
+      for (let i = 0; i < 6; i++) { const a = r() * 6.28, d = 26 + r() * 8; out.push(`<circle cx="${(Math.cos(a) * d).toFixed(1)}" cy="${(Math.sin(a) * d).toFixed(1)}" r="${(1 + r() * 2).toFixed(1)}" fill="var(--ink)"/>`); }
+      [[-8, -5], [-2, -10], [5, -9], [9, -3]].forEach(([x, y], i) => out.push(`<ellipse cx="${x}" cy="${y}" rx="2.6" ry="3.4" fill="${COLORS[i]}"/>`));
+      out.push(`<path d="M-6,6 Q0,-2 6,6 Q8,11 0,10 Q-8,11 -6,6Z" fill="var(--grey)"/>`);
+    } else {
+      COLORS.forEach((c, i) => { const a = i * 1.6 + r(), d = 6 + r() * 16; out.push(`<path transform="translate(${(Math.cos(a) * d).toFixed(1)} ${(Math.sin(a) * d).toFixed(1)})" d="${blob(r, 5 + r() * 4, 10, false)}" fill="${c}"/>`); });
+      for (let i = 0; i < 5; i++) { const a = r() * 6.28, d = 22 + r() * 8; out.push(`<circle cx="${(Math.cos(a) * d).toFixed(1)}" cy="${(Math.sin(a) * d).toFixed(1)}" r="${(.8 + r() * 1.6).toFixed(1)}" fill="${COLORS[i % 4]}"/>`); }
+    }
+    svg.innerHTML = out.join('');
+  }
+  const b = document.body;
+  const render = () => {
+    document.querySelectorAll('[data-splash]').forEach((s, i) => draw(s, b.dataset.m, 7 + i * 97));
+    document.getElementById('desc').textContent = desc[b.dataset.s] + '  ' + desc[b.dataset.m];
+    document.querySelectorAll('.ctl [data-s]').forEach(x => x.setAttribute('aria-pressed', x.dataset.s === b.dataset.s));
+    document.querySelectorAll('.ctl [data-m]').forEach(x => x.setAttribute('aria-pressed', x.dataset.m === b.dataset.m));
+  };
+  document.querySelectorAll('.ctl [data-s]').forEach(x => x.onclick = () => { b.dataset.s = x.dataset.s; render(); });
+  document.querySelectorAll('.ctl [data-m]').forEach(x => x.onclick = () => { b.dataset.m = x.dataset.m; render(); });
+  render();
+</script>
+</body>
+</html>

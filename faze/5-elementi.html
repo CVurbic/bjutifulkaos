@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faza 5 · Elementi</title>
+<!-- Specimen only: final build self-hosts the fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@900&family=Red+Hat+Text:wght@400;500;700&family=Caveat+Brush&display=swap" rel="stylesheet">
+<style>
+  /* Phase 1-4 tokens (faze/ODLUKE.md) */
+  :root {
+    --base: #f1efec; --ink: #231f20; --ink-hover: #3a3435; --muted: #5e5a5b; --grey: #9a999b;
+    --teal: #65c4b8; --yellow: #f7c57a; --orange: #ed8663; --red: #d55d4e;
+    --display: 'Red Hat Display', sans-serif; --text: 'Red Hat Text', sans-serif; --brush: 'Caveat Brush', cursive;
+    --gutter: 16px; --inner: 12px; --group: 24px; --section: 48px; --maxw: 1040px;
+    --r-btn: 12px; --r-photo: 8px; --r-tag: 999px; --line: 1px solid #0000001f;
+    --focus: 3px solid var(--teal);
+  }
+  @media (min-width: 900px) { :root { --gutter: 32px; --section: 64px; } }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--base); color: var(--ink); font: 400 1rem/1.55 var(--text); }
+  ::selection { background: color-mix(in srgb, var(--yellow) 60%, var(--base)); }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+  .sheet > section { padding-block: var(--section); border-bottom: var(--line); }
+  h1 { font: 900 2.35rem/1.02 var(--display); letter-spacing: -.01em; margin-bottom: var(--inner); }
+  h2 { font: 900 1.45rem/1.1 var(--display); margin-bottom: var(--inner); }
+  .brush { font-family: var(--brush); font-weight: 400; font-size: 1.22em; line-height: .8; }
+  .note { color: var(--muted); max-width: 60ch; margin-bottom: var(--group); }
+  .label { font-size: .8rem; color: var(--muted); margin-bottom: 8px; }
+  .row-v { display: flex; flex-wrap: wrap; gap: var(--group) 40px; align-items: flex-start; }
+  .row-v > div { min-width: 0; }
+  .states { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  a { color: inherit; }
+  :focus-visible { outline: var(--focus); outline-offset: 3px; }
+  .icon { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: var(--r-btn);
+         font: 700 1.05rem/1 var(--text); font-variant-numeric: tabular-nums; text-decoration: none; border: 1px solid var(--ink); cursor: pointer;
+         transition: background-color .18s cubic-bezier(.25,1,.5,1), transform .12s cubic-bezier(.25,1,.5,1); }
+  .btn-primary { background: var(--ink); color: var(--base); }
+  .btn-primary:hover, .btn-primary.is-hover { background: var(--ink-hover); }
+  .btn-secondary { background: transparent; color: var(--ink); }
+  .btn-secondary:hover, .btn-secondary.is-hover { background: color-mix(in srgb, var(--ink) 7%, var(--base)); }
+  .btn:active, .btn.is-active { transform: translateY(1px) scale(.985); }
+  .btn.is-focus { outline: var(--focus); outline-offset: 3px; }
+  .btn small { font-weight: 500; opacity: .75; font-size: .85rem; }
+
+  /* Language switch */
+  .lang-a { display: inline-flex; gap: 6px; font-weight: 700; font-size: .9rem; }
+  .lang-a a { text-decoration: none; padding: 10px 4px 6px; color: var(--muted); }
+  .lang-a a[aria-current] { color: var(--ink); box-shadow: inset 0 -3px var(--teal); }
+  /* Pill switch: one ink indicator slides under the active language. */
+  .lang-b { position: relative; display: inline-flex; border: var(--line); border-radius: var(--r-tag); padding: 3px; font-weight: 700; font-size: .85rem; isolation: isolate; }
+  .lang-b a { position: relative; text-decoration: none; padding: 8px 16px; border-radius: var(--r-tag); color: var(--muted); transition: color .25s cubic-bezier(.25,1,.5,1); }
+  .lang-b a[aria-current] { color: var(--base); }
+  .lang-b .ind { position: absolute; z-index: -1; top: 3px; bottom: 3px; left: 0; width: var(--w, 0); border-radius: var(--r-tag); background: var(--ink);
+                 transform: translateX(var(--x, 3px)); transition: transform .32s cubic-bezier(.25,1,.5,1), width .32s cubic-bezier(.25,1,.5,1); }
+  @media (prefers-reduced-motion: reduce) { .lang-b .ind, .lang-b a { transition: none; } }
+
+  /* Price picker */
+  .calc { display: grid; gap: var(--group); max-width: 560px; }
+  .calc fieldset { border: 0; padding: 0; }
+  .calc legend { font-weight: 700; margin-bottom: 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips label { position: relative; }
+  .chips input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chips span { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: var(--r-tag); border: 1px solid #00000033; font-weight: 700;
+                transition: background-color .2s cubic-bezier(.25,1,.5,1), border-color .2s, color .2s; }
+  .chips span small { font-weight: 500; color: var(--muted); }
+  .chips label:hover span { border-color: var(--ink); }
+  .chips input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--base); }
+  .chips input:checked + span small { color: #f1efecbf; }
+  .chips input:focus-visible + span { outline: var(--focus); outline-offset: 3px; }
+  .result { display: grid; gap: var(--inner); padding: var(--group); border-radius: var(--r-btn); background: color-mix(in srgb, var(--yellow) 22%, var(--base)); position: relative; }
+  .result .amt { font: 900 2.2rem/1 var(--display); font-variant-numeric: tabular-nums; }
+  .result .what { font-weight: 700; }
+  .result .fine { font-size: .85rem; color: var(--muted); max-width: 46ch; }
+  .result .btn { justify-self: start; }
+  .result[hidden] { display: none; }
+
+  /* Price list */
+  .prices { max-width: 520px; }
+  .price { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding-block: var(--inner); border-bottom: var(--line); }
+  .price b { font-weight: 700; }
+  .price .amt { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .price .sub { grid-column: 1; font-size: .85rem; color: var(--muted); }
+  .price .tbd { font-weight: 500; }
+
+  /* Tags + rating */
+  .tag { display: inline-block; padding: 6px 12px; border-radius: var(--r-tag); font-size: .85rem; font-weight: 700; background: color-mix(in srgb, var(--c) 40%, var(--base)); }
+  .rating { display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px 10px 12px; border: var(--line); border-radius: var(--r-tag); text-decoration: none; font-weight: 700; }
+  .rating .star { width: 20px; height: 20px; fill: var(--yellow); stroke: var(--ink); stroke-width: 1.5; }
+  .rating span { font-weight: 500; color: var(--muted); }
+
+  /* Info block */
+  .info { display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; max-width: 420px; }
+  .info dt { font-weight: 700; }
+  .info dd { color: var(--ink); }
+  .maplink { display: inline-flex; align-items: center; gap: 8px; margin-top: var(--inner); font-weight: 700; text-underline-offset: 4px; text-decoration-thickness: 2px; text-decoration-color: var(--teal); }
+
+  /* Photo + before/after */
+  .photo { width: 260px; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--r-photo); }
+  .caption { font-size: .8rem; color: var(--muted); margin-top: 8px; }
+  .ba { position: relative; width: 300px; max-width: 100%; aspect-ratio: 4/5; border-radius: var(--r-photo); overflow: hidden; user-select: none; }
+  .ba img, .ba .before { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .before { display: grid; place-items: center; padding: 24px; text-align: center; font-size: .85rem; color: var(--muted);
+            background: repeating-linear-gradient(45deg, #e4e1dd 0 10px, #ebe8e4 10px 20px); }
+  .ba .after { clip-path: inset(0 0 0 var(--x, 50%)); }
+  .ba .handle { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 2px; background: var(--base); transform: translateX(-1px); pointer-events: none; }
+  .ba .handle::after { content: ''; position: absolute; top: 50%; left: 50%; width: 36px; height: 36px; margin: -18px; border-radius: 50%; background: var(--base); box-shadow: 0 2px 8px #0003; }
+  .ba input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+  .ba .tagl { position: absolute; top: 10px; padding: 4px 10px; border-radius: var(--r-tag); background: var(--base); font-size: .75rem; font-weight: 700; }
+  .ba:has(input:focus-visible) { outline: var(--focus); outline-offset: 3px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; width: 300px; max-width: 100%; }
+  .pair > * { aspect-ratio: 4/5; border-radius: var(--r-photo); overflow: hidden; position: relative; }
+  .pair img, .pair .before { width: 100%; height: 100%; object-fit: cover; }
+  .pair .tagl { position: absolute; top: 8px; left: 8px; padding: 3px 8px; border-radius: var(--r-tag); background: var(--base); font-size: .7rem; font-weight: 700; }
+
+  /* Section heading with splash */
+  .shead { position: relative; display: inline-block; padding-right: 64px; }
+  .shead svg { position: absolute; right: 0; top: -14px; overflow: visible; }
+
+  /* Mobile call options (inside phone frames) */
+  .phones { display: flex; flex-wrap: wrap; gap: 32px; }
+  .phone { width: 240px; height: 420px; border: 8px solid #222; border-radius: 26px; overflow: hidden; position: relative; background: var(--base); font-size: .8rem; }
+  .phone .scr { padding: 14px; }
+  .phone .scr h3 { font: 900 1.35rem/1.05 var(--display); margin: 10px 0 8px; }
+  .phone .ln { height: 8px; border-radius: 4px; background: #0000000f; margin-bottom: 8px; }
+  .phone .ph { height: 120px; border-radius: var(--r-photo); background: #0000000f; margin-top: 12px; }
+  .phone .btn { min-height: 44px; font-size: .9rem; padding: 0 16px; }
+  .bar { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 10px; background: var(--base); border-top: var(--line); }
+  .bar .btn { width: 100%; }
+  .bar .btn-secondary { width: 44px; padding: 0; }
+  .fab { position: absolute; right: 14px; bottom: 14px; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--base); box-shadow: 0 6px 18px -6px #231f2080; }
+  .fab .icon { width: 24px; height: 24px; }
+
+  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:active { transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap" style="padding-top:var(--section)">
+  <h1>Faza 5: elementi</h1>
+  <p class="note">Svi elementi u zaključanim bojama, fontovima, razmacima i oblicima. Tamo gdje postoji više načina, ponuđene su varijante; ostalo je jedan prijedlog sa svim stanjima. Ikone su crtane (jedna debljina linije), ne emoji.</p>
+</div>
+
+<div class="sheet">
+<section><div class="wrap">
+  <h2>1 · Gumbi</h2>
+  <p class="note">Glavni gumb je uvijek "Nazovi" s brojem. Sporedni je za poruku; kanal (WhatsApp, Viber ili SMS) potvrđujemo u četvrtak.</p>
+  <p class="label">Glavni: normalno · hover · fokus (tipkovnica) · pritisnuto</p>
+  <div class="states">
+    <a class="btn btn-primary" href="tel:+385958008133"><svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Nazovi 095 800 8133</a>
+    <span class="btn btn-primary is-hover">Nazovi</span>
+    <span class="btn btn-primary is-focus">Nazovi</span>
+    <span class="btn btn-primary is-active">Nazovi</span>
+  </div>
+  <p class="label" style="margin-top:var(--group)">Sporedni: normalno · hover · fokus</p>
+  <div class="states">
+    <a class="btn btn-secondary" href="#"><svg class="icon" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Pošalji poruku <small>(kanal?)</small></a>
+    <span class="btn btn-secondary is-hover">Pošalji poruku</span>
+    <span class="btn btn-secondary is-focus">Pošalji poruku</span>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>2 · Poziv na mobitelu</h2>
+  <p class="note">Najvažnija odluka ove faze: kako je "Nazovi" uvijek na dohvat dok se scrolla.</p>
+  <div class="phones">
+    <div><p class="label">a · samo u uvodu i na dnu</p>
+      <div class="phone"><div class="scr"><h3>Šišanje i njega pasa</h3><div class="ln"></div><div class="ln" style="width:70%"></div><a class="btn btn-primary" href="#" style="width:100%;margin-top:8px">Nazovi</a><div class="ph"></div><div class="ph"></div></div></div></div>
+    <div><p class="label">b · traka na dnu (uvijek vidljiva)</p>
+      <div class="phone"><div class="scr"><h3>Šišanje i njega pasa</h3><div class="ln"></div><div class="ln" style="width:70%"></div><div class="ph"></div><div class="ph"></div></div>
+        <div class="bar"><a class="btn btn-primary" href="#"><svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Nazovi</a><a class="btn btn-secondary" href="#" aria-label="Pošalji poruku"><svg class="icon" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></a></div></div></div>
+    <div><p class="label"><b>c · okrugli gumb u kutu ✓</b></p>
+      <div class="phone"><div class="scr"><h3>Šišanje i njega pasa</h3><div class="ln"></div><div class="ln" style="width:70%"></div><div class="ph"></div><div class="ph"></div></div>
+        <a class="fab" href="#" aria-label="Nazovi"><svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a></div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>3 · Prekidač jezika</h2>
+  <p class="note">✓ Odabrano: tableta. Klikni HR / EN: crna podloga klizne ispod odabranog jezika (0,32 s, bez odskakivanja; isključeno ako sustav traži manje animacija).</p>
+  <nav class="lang-b" aria-label="Jezik"><span class="ind" aria-hidden="true"></span><a href="#" aria-current="true" lang="hr">HR</a><a href="#" lang="en">EN</a></nav>
+</div></section>
+
+<section><div class="wrap">
+  <h2>4 · Odaberi svog psa</h2>
+  <p class="note">Dva dodira do cijene. Kategorije (veličina, dlaka) i iznosi su prazni dok ih vlasnica ne potvrdi; upisuju se na jednom mjestu u kodu.</p>
+  <form class="calc" onsubmit="return false">
+    <fieldset><legend>Koliki je vaš pas?</legend>
+      <div class="chips">
+        <label><input type="radio" name="size" value="mali"><span>Mali <small>do — kg</small></span></label>
+        <label><input type="radio" name="size" value="srednji"><span>Srednji <small>— kg</small></span></label>
+        <label><input type="radio" name="size" value="veliki"><span>Veliki <small>od — kg</small></span></label>
+      </div>
+    </fieldset>
+    <fieldset><legend>Kakva mu je dlaka?</legend>
+      <div class="chips">
+        <label><input type="radio" name="coat" value="kratka"><span>Kratka</span></label>
+        <label><input type="radio" name="coat" value="duga"><span>Duga</span></label>
+        <label><input type="radio" name="coat" value="kovrcava"><span>Kovrčava <small>npr. pudlica</small></span></label>
+      </div>
+    </fieldset>
+    <div class="result" hidden aria-live="polite">
+      <span class="what"></span>
+      <span class="amt">— €</span>
+      <p class="fine">Okvirna cijena. Točnu potvrđujemo kad vidimo psa, jer ovisi i o stanju dlake.</p>
+      <a class="btn btn-primary" href="tel:+385958008133">Nazovi za termin</a>
+    </div>
+  </form>
+</div></section>
+
+<section><div class="wrap">
+  <h2>5 · Recenzije i kontakt</h2>
+  <p class="note">Ocjena se prikazuje točno kakva jest na Googleu, s poveznicom. Citate recenzija ne izmišljamo; doslovno ih prepišemo ako ih vlasnica želi.</p>
+  <div class="row-v">
+    <div><p class="label">Ocjena (link na Google)</p>
+      <a class="rating" href="https://www.google.com/maps/search/Bjutiful+Kaos+Zagreb"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg>5,0 <span>· 7 recenzija na Googleu</span></a></div>
+    <div><p class="label">Adresa i radno vrijeme</p>
+      <dl class="info"><dt>Adresa</dt><dd>Ul. grada Vukovara 237A, Zagreb</dd><dt>PON–PET</dt><dd>08–20</dd><dt>Vikend</dt><dd>po dogovoru</dd></dl>
+      <a class="maplink" href="https://www.google.com/maps/search/Bjutiful+Kaos+Zagreb"><svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Otvori u Google Mapama</a></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>6 · Fotke i prije/poslije</h2>
+  <p class="note">Imamo samo fotke "poslije". Za prije/poslije trebaju parovi od vlasnice; ovdje je prazno polje umjesto izmišljene fotke.</p>
+  <div class="row-v">
+    <div><p class="label">Fotka s potpisom</p><img class="photo" src="../resursi/bjutiful_kaos_1793171956_4017740007073810425_67534481843.webp" alt="Šnaucer nakon šišanja"><p class="caption">Šnaucer, nakon šišanja</p></div>
+    <div><p class="label"><b>a · klizač (povuci) ✓</b></p>
+      <div class="ba"><div class="before">fotka "prije"<br>(treba od vlasnice)</div><img class="after" src="../resursi/bjutiful_kaos_1753878112_3688119374154055571_67534481843.webp" alt="Pudlica nakon šišanja">
+        <span class="tagl" style="left:10px">prije</span><span class="tagl" style="right:10px">poslije</span><span class="handle"></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Usporedba prije i poslije"></div></div>
+    <div><p class="label">b · par jedan do drugog</p>
+      <div class="pair"><div><div class="before">prije<br>(treba)</div><span class="tagl">prije</span></div><div><img src="../resursi/bjutiful_kaos_1753878112_3688119374154055571_67534481843.webp" alt="Pudlica nakon šišanja"><span class="tagl">poslije</span></div></div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="shead">7 · Naslov sekcije <span class="brush">s mrljom</span><svg data-splash width="56" height="50" viewBox="-35 -30 70 60" aria-hidden="true"></svg></h2>
+  <p class="note">Mrlja iz loga uz naslov, desno gore. Kist samo na 1–2 riječi. Ovo je jedini ukras u naslovima.</p>
+</div></section>
+</div>
+
+<script>
+  // Language pill: move the indicator under the current link.
+  document.querySelectorAll('.lang-b').forEach(nav => {
+    const ind = nav.querySelector('.ind');
+    const place = a => { ind.style.setProperty('--w', a.offsetWidth + 'px'); ind.style.setProperty('--x', a.offsetLeft + 'px'); };
+    nav.querySelectorAll('a').forEach(a => a.onclick = e => { e.preventDefault();
+      nav.querySelectorAll('a').forEach(x => x.toggleAttribute('aria-current', x === a)); place(a); });
+    document.fonts.ready.then(() => place(nav.querySelector('[aria-current]')));
+  });
+  // Price picker. Owner fills PRICES (EUR, null = not confirmed yet).
+  const PRICES = {
+    mali:    { kratka: null, duga: null, kovrcava: null },
+    srednji: { kratka: null, duga: null, kovrcava: null },
+    veliki:  { kratka: null, duga: null, kovrcava: null },
+  };
+  const calc = document.querySelector('.calc');
+  calc.onchange = () => {
+    const size = calc.size.value, coat = calc.coat.value, res = calc.querySelector('.result');
+    if (!size || !coat) return;
+    const p = PRICES[size][coat];
+    res.querySelector('.what').textContent = `${size[0].toUpperCase() + size.slice(1)} pas, ${calc.querySelector(`[value="${coat}"] + span`).firstChild.textContent.trim().toLowerCase()} dlaka`;
+    res.querySelector('.amt').textContent = p == null ? '— €' : Array.isArray(p) ? `${p[0]}–${p[1]} €` : `${p} €`;
+    res.hidden = false;
+  };
+  // Before/after slider
+  document.querySelectorAll('.ba input').forEach(i => i.oninput = () => i.parentElement.style.setProperty('--x', i.value + '%'));
+  // Splash from phase 4 (mode 2: logo ink splash)
+  const rng = s => () => (s = (s * 16807) % 2147483647) / 2147483647;
+  function blob(r, R, n) {
+    const pts = Array.from({ length: n }, (_, i) => { const a = i / n * Math.PI * 2, k = r() < .3 ? 1.35 + r() * .35 : .82 + r() * .3; return [Math.cos(a) * R * k, Math.sin(a) * R * k]; });
+    const mid = (p, q) => [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2], f = v => v.toFixed(1);
+    let d = `M${mid(pts[n - 1], pts[0]).map(f)}`;
+    pts.forEach((p, i) => { const m = mid(p, pts[(i + 1) % n]); d += `Q${f(p[0])},${f(p[1])} ${f(m[0])},${f(m[1])}`; });
+    return d + 'Z';
+  }
+  document.querySelectorAll('[data-splash]').forEach((svg, k) => {
+    const r = rng(7 + k * 97), C = ['var(--teal)', 'var(--yellow)', 'var(--orange)', 'var(--red)'];
+    let out = `<path d="${blob(r, 18, 18)}" fill="var(--ink)"/>`;
+    for (let i = 0; i < 6; i++) { const a = r() * 6.28, d = 26 + r() * 8; out += `<circle cx="${(Math.cos(a) * d).toFixed(1)}" cy="${(Math.sin(a) * d).toFixed(1)}" r="${(1 + r() * 2).toFixed(1)}" fill="var(--ink)"/>`; }
+    [[-8, -5], [-2, -10], [5, -9], [9, -3]].forEach(([x, y], i) => out += `<ellipse cx="${x}" cy="${y}" rx="2.6" ry="3.4" fill="${C[i]}"/>`);
+    svg.innerHTML = out + `<path d="M-6,6 Q0,-2 6,6 Q8,11 0,10 Q-8,11 -6,6Z" fill="var(--grey)"/>`;
+  });
+</script>
+</body>
+</html>

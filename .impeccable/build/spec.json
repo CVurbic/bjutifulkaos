@@ -1,0 +1,344 @@
+{
+  "tool": "comp-spec",
+  "version": 1,
+  "createdAt": "2026-11-10T14:30:00.125Z",
+  "comp": "resursi/logo.png",
+  "warnings": [],
+  "uncoveredInkCells": [
+    "C0",
+    "D0",
+    "E0",
+    "G0",
+    "H0",
+    "I0",
+    "C1",
+    "D1",
+    "E1",
+    "F1",
+    "G1",
+    "H1",
+    "I1",
+    "C2",
+    "D2",
+    "E2",
+    "F2",
+    "G2",
+    "H2",
+    "B3",
+    "C3",
+    "D3",
+    "E3",
+    "F3",
+    "C4",
+    "D4",
+    "E4",
+    "F4",
+    "G4",
+    "D5",
+    "E5",
+    "F5",
+    "G5",
+    "D6",
+    "E6",
+    "F6",
+    "G6",
+    "E7",
+    "F7",
+    "G7",
+    "D9",
+    "E9",
+    "F9",
+    "G9"
+  ],
+  "compSize": {
+    "width": 871,
+    "height": 746
+  },
+  "aspect": 1.1676,
+  "orientation": "landscape",
+  "palette": [
+    {
+      "hex": "#f8f8f8",
+      "coverage": 0.8199
+    },
+    {
+      "hex": "#281828",
+      "coverage": 0.0918
+    },
+    {
+      "hex": "#232121",
+      "coverage": 0.0702
+    },
+    {
+      "hex": "#b2b2b2",
+      "coverage": 0.011
+    },
+    {
+      "hex": "#575757",
+      "coverage": 0.0071
+    }
+  ],
+  "bands": [
+    {
+      "y": 0.0455,
+      "strength": 0.2518
+    },
+    {
+      "y": 0.1455,
+      "strength": 0.2738
+    },
+    {
+      "y": 0.2455,
+      "strength": 0.2946
+    },
+    {
+      "y": 0.2909,
+      "strength": 0.2281
+    },
+    {
+      "y": 0.5364,
+      "strength": 0.2867
+    },
+    {
+      "y": 0.6545,
+      "strength": 0.2094
+    },
+    {
+      "y": 0.6818,
+      "strength": 0.2297
+    },
+    {
+      "y": 0.7545,
+      "strength": 0.4917
+    },
+    {
+      "y": 0.8909,
+      "strength": 0.4806
+    },
+    {
+      "y": 0.9182,
+      "strength": 0.3114
+    },
+    {
+      "y": 0.9636,
+      "strength": 0.2279
+    }
+  ],
+  "regions": [
+    {
+      "id": "sub",
+      "kind": "text",
+      "note": "SALON ZA ŠIŠANJE subtitle, light geometric sans caps",
+      "grid": null,
+      "box": {
+        "x": 0.2044,
+        "y": 0.8284,
+        "w": 0.5683,
+        "h": 0.0697
+      },
+      "px": {
+        "x": 178,
+        "y": 618,
+        "w": 495,
+        "h": 52
+      },
+      "aspect": 9.5192,
+      "palette": [
+        {
+          "hex": "#f7f7f7",
+          "coverage": 0.7916
+        },
+        {
+          "hex": "#232222",
+          "coverage": 0.1179
+        },
+        {
+          "hex": "#acacac",
+          "coverage": 0.0463
+        },
+        {
+          "hex": "#585858",
+          "coverage": 0.0236
+        },
+        {
+          "hex": "#808080",
+          "coverage": 0.0206
+        }
+      ],
+      "detail": {
+        "energy": 87.5317
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 14,
+          "capHeightPx": 34.5,
+          "inkIsDark": true,
+          "allCaps": true,
+          "advance": 0.7238,
+          "advTall": 0.7238,
+          "advX": null,
+          "gap": 0.1882,
+          "xRatio": null,
+          "stemW": 0.1278,
+          "contrast": 1.0295,
+          "serif": 0.6668,
+          "densTall": 0.3342,
+          "densX": null,
+          "weight": 0.3342
+        },
+        "widthClass": "normal",
+        "weightClass": "light",
+        "chosen": {
+          "family": "Wix Madefor Display",
+          "weight": 400,
+          "fontSizePx": 48,
+          "source": "index",
+          "fp": {
+            "lines": 1,
+            "glyphs": 13,
+            "capHeightPx": 34.8,
+            "inkIsDark": true,
+            "allCaps": true,
+            "advance": 0.8036,
+            "advTall": 0.8036,
+            "advX": null,
+            "gap": 0.1866,
+            "xRatio": null,
+            "stemW": 0.1116,
+            "contrast": 1.0476,
+            "serif": null,
+            "densTall": 0.3233,
+            "densX": null,
+            "weight": 0.3233
+          },
+          "stamp": "17cbc8b374c0"
+        }
+      }
+    },
+    {
+      "id": "k",
+      "kind": "text",
+      "note": "letter K of KAOS, heavy geometric sans",
+      "grid": null,
+      "box": {
+        "x": 0.1148,
+        "y": 0.5335,
+        "w": 0.1378,
+        "h": 0.2172
+      },
+      "px": {
+        "x": 100,
+        "y": 398,
+        "w": 120,
+        "h": 162
+      },
+      "aspect": 0.7407,
+      "palette": [
+        {
+          "hex": "#271925",
+          "coverage": 0.5184
+        },
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.4443
+        },
+        {
+          "hex": "#656565",
+          "coverage": 0.0308
+        },
+        {
+          "hex": "#a2a2a2",
+          "coverage": 0.0047
+        },
+        {
+          "hex": "#080808",
+          "coverage": 0.0019
+        }
+      ],
+      "detail": {
+        "energy": 9.9292
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-11-10T14:30:14.707Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "s",
+      "kind": "text",
+      "note": "letter S of KAOS, heavy geometric sans",
+      "grid": null,
+      "box": {
+        "x": 0.7348,
+        "y": 0.5335,
+        "w": 0.1435,
+        "h": 0.2172
+      },
+      "px": {
+        "x": 640,
+        "y": 398,
+        "w": 125,
+        "h": 162
+      },
+      "aspect": 0.7716,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.4998
+        },
+        {
+          "hex": "#281828",
+          "coverage": 0.3667
+        },
+        {
+          "hex": "#232121",
+          "coverage": 0.1121
+        },
+        {
+          "hex": "#c9c9c9",
+          "coverage": 0.0116
+        },
+        {
+          "hex": "#545353",
+          "coverage": 0.0098
+        }
+      ],
+      "detail": {
+        "energy": 8.9049
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-11-10T14:30:15.122Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    }
+  ],
+  "compSha256": "b6789721538bddf2358c970691dec0a7acb274bf47868455c32931d173543eaf",
+  "regionsSource": {
+    "path": ".impeccable/build/logo-regions.json",
+    "sha256": "7c472e0573b1160163b8fed77351dc5bce46bbc444157d0a68a1ef8fec7b4200"
+  }
+}

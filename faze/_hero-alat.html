@@ -1,0 +1,20 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Alat: široka fotka</title>
+<pre id="log">…</pre>
+<script>
+  // Bakes the phase-7 grade into resursi/hero-sirok.jpg and saves 960/1440/1776 WebP into img/ (dev server PUT).
+  const GRADE = 'saturate(.9) contrast(1.06) brightness(1.03) sepia(.07)';
+  (async () => {
+    const img = new Image(); img.src = '../resursi/hero-sirok.jpg'; await img.decode();
+    const out = [];
+    for (const w of [960, 1440, 1776]) {
+      const h = Math.round(img.naturalHeight * w / img.naturalWidth), c = new OffscreenCanvas(w, h), x = c.getContext('2d');
+      x.filter = GRADE; x.imageSmoothingQuality = 'high'; x.drawImage(img, 0, 0, w, h);
+      const blob = await c.convertToBlob({ type: 'image/webp', quality: .8 });
+      const res = await fetch(`/img/hero-sirok-${w}.webp`, { method: 'PUT', body: blob });
+      out.push(`hero-sirok-${w}.webp ${w}x${h} ${Math.round(blob.size / 1024)}KB ${res.status}`);
+    }
+    window.DONE = out; document.getElementById('log').textContent = out.join('\n');
+  })().catch(e => window.DONE = ['ERR ' + e]);
+</script>

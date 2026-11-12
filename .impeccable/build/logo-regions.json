@@ -1,0 +1,5 @@
+{ "allowUncovered": true, "regions": [
+  { "id": "sub", "kind": "text", "pixelBox": {"x":178,"y":618,"w":495,"h":52}, "note": "SALON ZA ŠIŠANJE subtitle, light geometric sans caps" },
+  { "id": "k", "kind": "text", "pixelBox": {"x":100,"y":398,"w":120,"h":162}, "note": "letter K of KAOS, heavy geometric sans" },
+  { "id": "s", "kind": "text", "pixelBox": {"x":640,"y":398,"w":125,"h":162}, "note": "letter S of KAOS, heavy geometric sans" }
+] }

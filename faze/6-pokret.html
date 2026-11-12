@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faza 6 · Pokret</title>
+<!-- Specimen only: final build self-hosts the fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@900&family=Red+Hat+Text:wght@400;500;700&family=Caveat+Brush&display=swap" rel="stylesheet">
+<style>
+  /* Phase 1-5 tokens (faze/ODLUKE.md) */
+  :root {
+    --base: #f1efec; --ink: #231f20; --ink-hover: #3a3435; --muted: #5e5a5b; --grey: #9a999b;
+    --teal: #65c4b8; --yellow: #f7c57a; --orange: #ed8663; --red: #d55d4e;
+    --display: 'Red Hat Display', sans-serif; --text: 'Red Hat Text', sans-serif; --brush: 'Caveat Brush', cursive;
+    --gutter: 16px; --inner: 12px; --group: 24px; --section: 48px; --section-photo: 96px; --maxw: 1040px; --col: 52ch;
+    --r-btn: 12px; --r-photo: 8px; --r-tag: 999px; --line: 1px solid #0000001f; --focus: 3px solid var(--teal);
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+  @media (min-width: 900px) { :root { --gutter: 32px; --section: 64px; --section-photo: 160px; } }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--base); color: var(--ink); font: 400 1rem/1.55 var(--text); padding-bottom: 88px; }
+  ::selection { background: color-mix(in srgb, var(--yellow) 60%, var(--base)); }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: var(--focus); outline-offset: 3px; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+  section { padding-block: var(--section); }
+  section.photo { padding-block: var(--section-photo); }
+  h1 { font: 900 2.35rem/1.02 var(--display); letter-spacing: -.01em; text-wrap: balance; margin-bottom: var(--inner); }
+  h2 { font: 900 1.45rem/1.1 var(--display); margin-bottom: var(--group); }
+  @media (min-width: 900px) { h1 { font-size: 3.4rem; } h2 { font-size: 1.9rem; } }
+  .brush { font-family: var(--brush); font-weight: 400; font-size: 1.22em; line-height: .8; }
+  p { max-width: var(--col); text-wrap: pretty; }
+  .muted { color: var(--muted); }
+  .icon { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Control bar */
+  .ctl { position: sticky; top: 0; z-index: 30; background: var(--ink); color: var(--base); font: 400 .85rem/1.3 system-ui, sans-serif; }
+  .ctl .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-block: 10px; }
+  .ctl b { font-weight: 700; }
+  .ctl button { font: inherit; padding: 8px 12px; border-radius: 8px; border: 1px solid #fff4; background: transparent; color: inherit; cursor: pointer; }
+  .ctl button[aria-pressed="true"] { background: var(--base); color: var(--ink); }
+  .ctl .desc { flex-basis: 100%; opacity: .85; }
+
+  /* Header + language pill (phase 5) */
+  .top { display: flex; justify-content: space-between; align-items: center; padding-block: var(--inner); border-bottom: var(--line); }
+  .top img { width: 92px; mix-blend-mode: multiply; }
+  .lang { position: relative; display: inline-flex; border: var(--line); border-radius: var(--r-tag); padding: 3px; font-weight: 700; font-size: .85rem; isolation: isolate; }
+  .lang a { position: relative; text-decoration: none; padding: 8px 16px; border-radius: var(--r-tag); color: var(--muted); transition: color .25s var(--ease); }
+  .lang a[aria-current] { color: var(--base); }
+  .lang .ind { position: absolute; z-index: -1; top: 3px; bottom: 3px; left: 0; width: var(--w, 0); border-radius: var(--r-tag); background: var(--ink); transform: translateX(var(--x, 3px)); transition: transform .32s var(--ease), width .32s var(--ease); }
+
+  /* Hero */
+  .hero { display: grid; gap: var(--group); }
+  .hero .lead { color: var(--muted); margin-bottom: var(--group); }
+  .heading { position: relative; padding-right: 64px; }
+  .heading .w { display: inline-block; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: var(--r-btn); font: 700 1.05rem/1 var(--text); text-decoration: none; border: 1px solid var(--ink);
+         background: var(--ink); color: var(--base); transition: background-color .18s var(--ease), transform .12s var(--ease); font-variant-numeric: tabular-nums; }
+  .btn:hover { background: var(--ink-hover); }
+  .btn:active { transform: translateY(1px) scale(.985); }
+  .frame { overflow: hidden; border-radius: var(--r-photo); }
+  .frame img { width: 100%; aspect-ratio: 4/3; object-fit: cover; transition: transform .5s var(--ease); }
+  .frame:hover img { transform: scale(1.03); }
+  [data-lvl="c"] .frame:hover img { transform: scale(1.04) rotate(-.6deg); }
+  @media (min-width: 900px) { .hero { grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; } .frame img { aspect-ratio: 4/5; } }
+
+  /* Splash */
+  .splash { position: absolute; right: 0; top: -14px; overflow: visible; pointer-events: none; }
+  .splash * { transform-box: fill-box; transform-origin: center; }
+  [data-lvl="c"] .splash { pointer-events: auto; }
+
+  /* Price picker (phase 5) */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips label { position: relative; }
+  .chips input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chips span { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 18px; border-radius: var(--r-tag); border: 1px solid #00000033; font-weight: 700;
+                transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s; }
+  .chips label:hover span { border-color: var(--ink); }
+  .chips input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--base); }
+  .chips input:focus-visible + span { outline: var(--focus); outline-offset: 3px; }
+  .result { margin-top: var(--group); padding: var(--group); border-radius: var(--r-btn); background: color-mix(in srgb, var(--yellow) 22%, var(--base)); max-width: 520px; }
+  .result .amt { font: 900 2.2rem/1 var(--display); display: block; margin: 8px 0; }
+
+  /* Gallery */
+  .gal-head { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gutter); position: relative; }
+  .gal-head .heading { display: inline-block; }
+  .gal { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; }
+  @media (min-width: 900px) { .gal { grid-template-columns: repeat(3, 1fr); } }
+  .gal .cell { overflow: hidden; }
+  .gal img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform .5s var(--ease); }
+  .gal .cell:hover img { transform: scale(1.03); }
+
+  .contact dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; margin-bottom: var(--group); }
+  .contact dt { font-weight: 700; }
+
+  /* Call FAB (phase 5, option C) */
+  .fab { position: fixed; right: 16px; bottom: 16px; z-index: 20; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--base);
+         box-shadow: 0 6px 18px -6px #231f2080; transition: transform .12s var(--ease); }
+  .fab:active { transform: scale(.94); }
+  .fab .icon { width: 24px; height: 24px; }
+  .fab.out { transform: scale(.6); opacity: 0; pointer-events: none; }
+  .fab { transition: transform .3s var(--ease), opacity .3s var(--ease); }
+</style>
+</head>
+<body data-lvl="b">
+<div class="ctl"><div class="wrap">
+  <b>Pokret</b>
+  <span role="group" aria-label="Razina pokreta">
+    <button data-lvl="a" aria-pressed="false">A · Mirno</button>
+    <button data-lvl="b" aria-pressed="true">B · Razigrano</button>
+    <button data-lvl="c" aria-pressed="false">C · Kaos</button>
+  </span>
+  <button id="replay">↻ Ponovi</button>
+  <button id="rm" aria-pressed="false">Smanjeni pokret</button>
+  <span class="desc" id="desc"></span>
+</div></div>
+
+<div class="wrap"><div class="top">
+  <img src="../resursi/logo.png" alt="Bjutiful Kaos">
+  <nav class="lang" aria-label="Jezik"><span class="ind" aria-hidden="true"></span><a href="#" aria-current="true" lang="hr">HR</a><a href="#" lang="en">EN</a></nav>
+</div></div>
+
+<section>
+  <div class="wrap hero">
+    <div>
+      <div class="heading">
+        <svg class="splash" data-splash width="56" height="50" viewBox="-35 -30 70 60" aria-hidden="true"></svg>
+        <h1 data-words>Šišanje i njega pasa <span class="brush">u Trnju</span></h1>
+      </div>
+      <p class="lead">Salon u Ulici grada Vukovara 237A. Nazovite i dogovorite termin, radnim danom od 8 do 20 sati.</p>
+      <a class="btn" href="tel:+385958008133" id="heroCta">Nazovi 095 800 8133</a>
+    </div>
+    <div class="frame" data-cut><img src="../resursi/bjutiful_kaos_1753878112_3688119374154055571_67534481843.webp" alt="Pudlica nakon šišanja"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="heading" style="display:inline-block"><svg class="splash" data-splash width="56" height="50" viewBox="-35 -30 70 60" aria-hidden="true"></svg><h2>Odaberi svog psa</h2></div>
+    <div class="chips">
+      <label><input type="radio" name="size" value="m"><span>Mali</span></label>
+      <label><input type="radio" name="size" value="s" checked><span>Srednji</span></label>
+      <label><input type="radio" name="size" value="v"><span>Veliki</span></label>
+    </div>
+    <div class="result"><b>Srednji pas</b><span class="amt">— €</span><span class="muted">Okvirna cijena, iznosi od vlasnice.</span></div>
+  </div>
+</section>
+
+<section class="photo">
+  <div class="gal-head"><div class="heading"><svg class="splash" data-splash width="56" height="50" viewBox="-35 -30 70 60" aria-hidden="true"></svg><h2>Iz salona</h2></div></div>
+  <div class="gal">
+    <div class="cell"><img src="../resursi/bjutiful_kaos_1793171956_4017740007073810425_67534481843.webp" alt="Šnaucer"></div>
+    <div class="cell"><img src="../resursi/bjutiful_kaos_1770619695_3828557928957769141_67534481843.webp" alt="Pas nakon šišanja"></div>
+    <div class="cell"><img src="../resursi/bjutiful_kaos_1764054580_3773485780807739970_67534481843.webp" alt="Pas nakon šišanja"></div>
+    <div class="cell"><img src="../resursi/bjutiful_kaos_1768028501_3806821443263057334_67534481843.webp" alt="Pas nakon šišanja"></div>
+    <div class="cell"><img src="../resursi/bjutiful_kaos_1789713254_3988725806485551032_67534481843.webp" alt="Pas nakon šišanja"></div>
+    <div class="cell"><img src="../resursi/bjutiful_kaos_1762154497_3757546729386855462_67534481843.webp" alt="Pas nakon šišanja"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap contact">
+    <h2>Kontakt</h2>
+    <dl><dt>Adresa</dt><dd>Ul. grada Vukovara 237A, Zagreb</dd><dt>PON–PET</dt><dd>08–20</dd><dt>Vikend</dt><dd>po dogovoru</dd></dl>
+  </div>
+</section>
+
+<a class="fab" href="tel:+385958008133" aria-label="Nazovi"><svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+
+<script>
+  const desc = {
+    a: 'A · Mirno: samo odziv na dodir (gumbi, tablete, jezik) i lagani zoom fotke na hover. Mrlje se samo blago pojave. Ništa se ne animira samo od sebe.',
+    b: 'B · Razigrano: kao A, plus glavni trenutak: kad sekcija uđe u ekran, mrlja tinte "pljusne" (kapljice se razlete, jastučići šape se utisnu jedan po jedan). Galerija se otkrije redom, okrugli gumb uleti nakon uvoda. Svaka animacija samo jednom.',
+    c: 'C · Kaos: kao B, plus fotka u uvodu se otkrije kao rez škarama, riječi naslova upadnu jedna po jedna, mrlja se trese kad prijeđeš mišem, fotke se lagano nagnu.'
+  };
+  const body = document.body, lvl = () => body.dataset.lvl;
+  let simReduced = false;
+  const reduced = () => simReduced || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const E = 'cubic-bezier(.16, 1, .3, 1)';
+
+  // --- Splash (phase 4, mode 2) with tagged parts so they can animate separately.
+  const rng = s => () => (s = (s * 16807) % 2147483647) / 2147483647;
+  function blob(r, R, n) {
+    const pts = Array.from({ length: n }, (_, i) => { const a = i / n * Math.PI * 2, k = r() < .3 ? 1.35 + r() * .35 : .82 + r() * .3; return [Math.cos(a) * R * k, Math.sin(a) * R * k]; });
+    const mid = (p, q) => [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2], f = v => v.toFixed(1);
+    let d = `M${mid(pts[n - 1], pts[0]).map(f)}`;
+    pts.forEach((p, i) => { const m = mid(p, pts[(i + 1) % n]); d += `Q${f(p[0])},${f(p[1])} ${f(m[0])},${f(m[1])}`; });
+    return d + 'Z';
+  }
+  document.querySelectorAll('[data-splash]').forEach((svg, k) => {
+    const r = rng(7 + k * 97), C = ['var(--teal)', 'var(--yellow)', 'var(--orange)', 'var(--red)'];
+    let out = `<path class="blob" d="${blob(r, 18, 18)}" fill="var(--ink)"/>`;
+    for (let i = 0; i < 6; i++) { const a = r() * 6.28, d = 26 + r() * 8, x = Math.cos(a) * d, y = Math.sin(a) * d;
+      out += `<circle class="drop" data-x="${x.toFixed(1)}" data-y="${y.toFixed(1)}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(1 + r() * 2).toFixed(1)}" fill="var(--ink)"/>`; }
+    [[-8, -5], [-2, -10], [5, -9], [9, -3]].forEach(([x, y], i) => out += `<ellipse class="pad" cx="${x}" cy="${y}" rx="2.6" ry="3.4" fill="${C[i]}"/>`);
+    svg.innerHTML = out + `<path class="pad palm" d="M-6,6 Q0,-2 6,6 Q8,11 0,10 Q-8,11 -6,6Z" fill="var(--grey)"/>`;
+    svg.addEventListener('pointerenter', () => { if (lvl() !== 'c' || reduced()) return;
+      svg.querySelectorAll('.drop').forEach(d => d.animate([{ transform: 'translate(0,0)' }, { transform: `translate(${(Math.random() * 6 - 3).toFixed(1)}px,${(Math.random() * 6 - 3).toFixed(1)}px)` }, { transform: 'translate(0,0)' }], { duration: 360, easing: 'ease-in-out' })); });
+  });
+
+  // The focal moment: ink lands, droplets fly out from the centre, paw pads stamp in one by one.
+  function splat(svg) {
+    if (reduced() || lvl() === 'a') return svg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: lvl() === 'a' ? 300 : 200 });
+    svg.querySelector('.blob').animate([{ transform: 'scale(.15)', opacity: 0 }, { transform: 'scale(1.06)', opacity: 1, offset: .55 }, { transform: 'scale(1)' }], { duration: 560, easing: E, fill: 'backwards' });
+    svg.querySelectorAll('.drop').forEach((d, i) => d.animate([{ transform: `translate(${-d.dataset.x}px,${-d.dataset.y}px) scale(.3)`, opacity: 0 }, { transform: 'none', opacity: 1 }],
+      { duration: 520, delay: 90 + i * 25, easing: E, fill: 'backwards' }));
+    svg.querySelectorAll('.pad').forEach((p, i) => p.animate([{ transform: 'scale(0)' }, { transform: 'scale(1)' }], { duration: 260, delay: 330 + i * 70, easing: E, fill: 'backwards' }));
+  }
+  function revealGallery() {
+    if (lvl() === 'a') return;
+    document.querySelectorAll('.gal .cell').forEach((c, i) => c.animate(reduced() ? [{ opacity: 0 }, { opacity: 1 }]
+      : [{ clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: reduced() ? 250 : 620, delay: Math.min(i * 70, 350), easing: E, fill: 'backwards' }));
+  }
+  function heroIntro() {
+    if (lvl() !== 'c') return;
+    if (reduced()) return document.querySelector('[data-cut]').animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
+    // Scissor cut: a slanted edge sweeps across the photo.
+    document.querySelector('[data-cut]').animate([{ clipPath: 'polygon(0 0, 0 0, -20% 100%, 0 100%)' }, { clipPath: 'polygon(0 0, 120% 0, 100% 100%, 0 100%)' }], { duration: 750, delay: 150, easing: E, fill: 'backwards' });
+    document.querySelectorAll('[data-words] .w').forEach((w, i) => w.animate([{ transform: 'translateY(.5em)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 480, delay: i * 55, easing: E, fill: 'backwards' }));
+  }
+  // Wrap heading words once (spaces kept as text so wrapping is unchanged).
+  document.querySelectorAll('[data-words]').forEach(h => [...h.childNodes].forEach(n => {
+    if (n.nodeType === 3) n.replaceWith(...n.textContent.split(/(\s+)/).map(t => /\S/.test(t) ? Object.assign(document.createElement('span'), { className: 'w', textContent: t }) : document.createTextNode(t)));
+    else n.classList.add('w');
+  }));
+
+  // Run each reveal once per section entering view; content is fully visible if this never runs.
+  let io;
+  function observe() {
+    io && io.disconnect();
+    io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.unobserve(e.target);
+      if (e.target.matches('[data-splash]')) splat(e.target); else revealGallery(); }), { threshold: .4 });
+    document.querySelectorAll('[data-splash], .gal').forEach(el => io.observe(el));
+  }
+  // Call button arrives once the hero CTA scrolls away (B, C); always present in A.
+  const fab = document.querySelector('.fab');
+  new IntersectionObserver(([e]) => fab.classList.toggle('out', lvl() !== 'a' && e.isIntersecting)).observe(document.getElementById('heroCta'));
+
+  // Language pill
+  const nav = document.querySelector('.lang'), ind = nav.querySelector('.ind');
+  const place = a => { ind.style.setProperty('--w', a.offsetWidth + 'px'); ind.style.setProperty('--x', a.offsetLeft + 'px'); };
+  nav.querySelectorAll('a').forEach(a => a.onclick = e => { e.preventDefault(); nav.querySelectorAll('a').forEach(x => x.toggleAttribute('aria-current', x === a)); place(a); });
+  document.querySelectorAll('.chips input').forEach(i => i.onchange = () => document.querySelector('.result b').textContent = i.nextElementSibling.textContent + ' pas');
+
+  function run() {
+    document.getElementById('desc').textContent = desc[lvl()] + (simReduced ? '  [Smanjeni pokret: umjesto pomaka samo kratko pretapanje.]' : '');
+    document.querySelectorAll('.ctl [data-lvl]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lvl === lvl()));
+    document.getAnimations().forEach(a => a.cancel());
+    heroIntro(); observe();
+  }
+  document.querySelectorAll('.ctl [data-lvl]').forEach(b => b.onclick = () => { body.dataset.lvl = b.dataset.lvl; scrollTo(0, 0); run(); });
+  document.getElementById('replay').onclick = () => { scrollTo(0, 0); run(); };
+  document.getElementById('rm').onclick = e => { simReduced = !simReduced; e.target.setAttribute('aria-pressed', simReduced); run(); };
+  document.fonts.ready.then(() => { place(nav.querySelector('[aria-current]')); run(); });
+</script>
+</body>
+</html>

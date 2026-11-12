@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-10T15:57:29.568Z",
+  "title": "Design System: Bjutiful Kaos",
+  "extensions": {
+    "colorMeta": {
+      "base": {
+        "role": "neutral",
+        "displayName": "Kamen",
+        "canonical": "oklch(95.3% 0.005 78)",
+        "tonalRamp": [
+          "oklch(15% 0.001 78)",
+          "oklch(26% 0.002 78)",
+          "oklch(38% 0.003 78)",
+          "oklch(49% 0.004 78)",
+          "oklch(61% 0.004 78)",
+          "oklch(72% 0.003 78)",
+          "oklch(84% 0.002 78)",
+          "oklch(95% 0.001 78)"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Logo Ink",
+        "canonical": "oklch(24.4% 0.006 1)",
+        "tonalRamp": [
+          "oklch(15% 0.001 1)",
+          "oklch(26% 0.003 1)",
+          "oklch(38% 0.004 1)",
+          "oklch(49% 0.006 1)",
+          "oklch(61% 0.006 1)",
+          "oklch(72% 0.004 1)",
+          "oklch(84% 0.003 1)",
+          "oklch(95% 0.001 1)"
+        ]
+      },
+      "ink-hover": {
+        "role": "primary",
+        "displayName": "Lifted Ink",
+        "canonical": "oklch(33.2% 0.009 6)",
+        "tonalRamp": [
+          "oklch(15% 0.001 6)",
+          "oklch(26% 0.004 6)",
+          "oklch(38% 0.006 6)",
+          "oklch(49% 0.009 6)",
+          "oklch(61% 0.009 6)",
+          "oklch(72% 0.006 6)",
+          "oklch(84% 0.004 6)",
+          "oklch(95% 0.001 6)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "oklch(47.2% 0.005 0)",
+        "tonalRamp": [
+          "oklch(15% 0.001 0)",
+          "oklch(26% 0.002 0)",
+          "oklch(38% 0.004 0)",
+          "oklch(49% 0.005 0)",
+          "oklch(61% 0.005 0)",
+          "oklch(72% 0.004 0)",
+          "oklch(84% 0.002 0)",
+          "oklch(95% 0.001 0)"
+        ]
+      },
+      "grey": {
+        "role": "neutral",
+        "displayName": "Paw Grey",
+        "canonical": "oklch(68.4% 0.003 308)",
+        "tonalRamp": [
+          "oklch(15% 0.000 308)",
+          "oklch(26% 0.001 308)",
+          "oklch(38% 0.002 308)",
+          "oklch(49% 0.003 308)",
+          "oklch(61% 0.003 308)",
+          "oklch(72% 0.002 308)",
+          "oklch(84% 0.001 308)",
+          "oklch(95% 0.000 308)"
+        ]
+      },
+      "teal": {
+        "role": "tertiary",
+        "displayName": "Paw Teal",
+        "canonical": "oklch(75.9% 0.092 185)",
+        "tonalRamp": [
+          "oklch(15% 0.014 185)",
+          "oklch(26% 0.038 185)",
+          "oklch(38% 0.064 185)",
+          "oklch(49% 0.091 185)",
+          "oklch(61% 0.091 185)",
+          "oklch(72% 0.064 185)",
+          "oklch(84% 0.038 185)",
+          "oklch(95% 0.014 185)"
+        ]
+      },
+      "yellow": {
+        "role": "tertiary",
+        "displayName": "Paw Yellow",
+        "canonical": "oklch(85.2% 0.109 77)",
+        "tonalRamp": [
+          "oklch(15% 0.016 77)",
+          "oklch(26% 0.045 77)",
+          "oklch(38% 0.076 77)",
+          "oklch(49% 0.107 77)",
+          "oklch(61% 0.107 77)",
+          "oklch(72% 0.076 77)",
+          "oklch(84% 0.045 77)",
+          "oklch(95% 0.016 77)"
+        ]
+      },
+      "orange": {
+        "role": "tertiary",
+        "displayName": "Paw Orange",
+        "canonical": "oklch(72.5% 0.136 39)",
+        "tonalRamp": [
+          "oklch(15% 0.020 39)",
+          "oklch(26% 0.056 39)",
+          "oklch(38% 0.094 39)",
+          "oklch(49% 0.133 39)",
+          "oklch(61% 0.133 39)",
+          "oklch(72% 0.094 39)",
+          "oklch(84% 0.056 39)",
+          "oklch(95% 0.020 39)"
+        ]
+      },
+      "red": {
+        "role": "tertiary",
+        "displayName": "Paw Red",
+        "canonical": "oklch(62.6% 0.155 29)",
+        "tonalRamp": [
+          "oklch(15% 0.023 29)",
+          "oklch(26% 0.063 29)",
+          "oklch(38% 0.108 29)",
+          "oklch(49% 0.152 29)",
+          "oklch(61% 0.152 29)",
+          "oklch(72% 0.108 29)",
+          "oklch(84% 0.063 29)",
+          "oklch(95% 0.023 29)"
+        ]
+      },
+      "line-c": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#0000001f"
+      },
+      "on-ink": {
+        "role": "neutral",
+        "displayName": "Kamen on Ink",
+        "canonical": "#f1efec"
+      },
+      "on-ink-muted": {
+        "role": "neutral",
+        "displayName": "Kamen on Ink, Muted",
+        "canonical": "#f1efecbf"
+      },
+      "white-hover": {
+        "role": "neutral",
+        "displayName": "Pure White (one-off)",
+        "canonical": "#ffffff",
+        "note": "Light button hover on the ink band only; never a ground."
+      },
+      "tbd-box-tint": {
+        "role": "neutral",
+        "displayName": "Placeholder Box Tint (pitch-only)",
+        "canonical": "color-mix(in srgb, var(--grey) 10%, var(--base))",
+        "note": "Removed with the pitch placeholders."
+      },
+      "tbd-note-tint": {
+        "role": "tertiary",
+        "displayName": "Placeholder Note Tint (pitch-only)",
+        "canonical": "color-mix(in srgb, var(--orange) 30%, var(--base))",
+        "note": "Removed with the pitch placeholders."
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "H1 on the ink band only, below 900px."
+      },
+      "display-desktop": {
+        "displayName": "Display (desktop)",
+        "purpose": "H1 from 900px; also the review score size."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles below 900px."
+      },
+      "headline-desktop": {
+        "displayName": "Headline (desktop)",
+        "purpose": "Section titles from 900px."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Price amount (2.2rem) and review score (3.4rem)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text, max 52ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons with tabular phone numbers; 700 weight for chips, legends, nav."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Sub-lines, fine print and placeholder boxes in muted."
+      },
+      "label-small": {
+        "displayName": "Label Small",
+        "purpose": "Language pill, slider tags, small hint in buttons, footer."
+      },
+      "brush": {
+        "displayName": "Brush",
+        "purpose": "One or two words inside a headline, once per screen."
+      }
+    },
+    "shadows": [
+      {
+        "name": "fab-lift",
+        "value": "0 6px 18px -6px #231f2080",
+        "purpose": "Only on the floating mobile call button."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "The only easing curve; no bounce or elastic."
+      },
+      {
+        "name": "press",
+        "value": "120ms",
+        "purpose": "Button press: translateY(1px) scale(.985)."
+      },
+      {
+        "name": "hover-color",
+        "value": "180ms",
+        "purpose": "Button background change."
+      },
+      {
+        "name": "chip-color",
+        "value": "200ms",
+        "purpose": "Chip fill and text change."
+      },
+      {
+        "name": "icon-rotate",
+        "value": "250ms",
+        "purpose": "FAQ plus icon rotates 45deg; pill text colour."
+      },
+      {
+        "name": "fab-in",
+        "value": "300ms",
+        "purpose": "Call FAB scales in from .6 with fade."
+      },
+      {
+        "name": "lang-slide",
+        "value": "320ms",
+        "purpose": "Language pill indicator slide."
+      },
+      {
+        "name": "photo-hover",
+        "value": "500ms",
+        "purpose": "Gallery tile zoom to 1.03."
+      },
+      {
+        "name": "splash-blob",
+        "value": "560ms",
+        "purpose": "Splash ink scale .15 -> 1.06 -> 1, once."
+      },
+      {
+        "name": "splash-drops",
+        "value": "520ms, +25ms stagger, 90ms start",
+        "purpose": "Droplets fly in from the centre."
+      },
+      {
+        "name": "splash-pads",
+        "value": "260ms, +70ms stagger, 330ms start",
+        "purpose": "Paw pads stamp in."
+      },
+      {
+        "name": "gallery-reveal",
+        "value": "620ms, 70ms stagger, max 350ms delay",
+        "purpose": "One-time clip-path reveal of gallery tiles, top to bottom: inset(0 0 100% 0) to inset(0)."
+      },
+      {
+        "name": "reduced-fade",
+        "value": "200-250ms",
+        "purpose": "Reduced motion: splash and gallery fade only."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop",
+        "value": "900px"
+      }
+    ],
+    "spacingDesktop": {
+      "gutter": "32px",
+      "section": "64px",
+      "section-photo": "160px"
+    },
+    "temporary": [
+      {
+        "name": "hero-sirok",
+        "files": "img/hero-sirok-{960,1440,1776}.webp",
+        "note": "Canva AI extension of real photo pas-01 (dog real, sides generated), labelled on page. Replace before publishing with owner photo, ideally 2880x1200 (12:5)."
+      },
+      {
+        "name": "pitch-placeholders",
+        "classes": ".tbd, .tbd-note, .tbd-box",
+        "note": "Pitch-only markers for unconfirmed content; delete when the owner confirms. Not a reusable pattern."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ink call button with phone icon; the main action on Kamen.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/></svg>Nazovi 095 800 8133</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 24px;border-radius:var(--r-btn,12px);font:700 1.05rem/1.1 var(--text,\"Red Hat Text\",system-ui,sans-serif);font-variant-numeric:tabular-nums;text-decoration:none;border:1px solid var(--ink,#231f20);cursor:pointer;transition:background-color .18s cubic-bezier(.16,1,.3,1),transform .12s cubic-bezier(.16,1,.3,1);} .ds-btn-primary{background:var(--ink,#231f20);color:var(--on-ink,#f1efec);} .ds-btn-primary:hover{background:var(--ink-hover,#3a3435);} .ds-btn:active{transform:translateY(1px) scale(.985);} .ds-btn:focus-visible{outline:3px solid var(--ink,#231f20);outline-offset:3px;}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined ink button for the second action (message).",
+      "html": "<a class=\"ds-btn2\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7.9 20A9 9 0 1 0 4 16.1L2 22Z\"/></svg>Pošalji poruku</a>",
+      "css": ".ds-btn2{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 24px;border-radius:var(--r-btn,12px);font:700 1.05rem/1.1 var(--text,\"Red Hat Text\",system-ui,sans-serif);font-variant-numeric:tabular-nums;text-decoration:none;border:1px solid var(--ink,#231f20);cursor:pointer;transition:background-color .18s cubic-bezier(.16,1,.3,1),transform .12s cubic-bezier(.16,1,.3,1);background:transparent;color:var(--ink,#231f20);} .ds-btn2:hover{background:color-mix(in srgb,var(--ink,#231f20) 7%,var(--base,#f1efec));} .ds-btn2:active{transform:translateY(1px) scale(.985);} .ds-btn2:focus-visible{outline:3px solid var(--ink,#231f20);outline-offset:3px;}"
+    },
+    {
+      "name": "Light Button on Ink Band",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "Kamen call button used on the ink hero band.",
+      "html": "<div class=\"ds-band\"><a class=\"ds-btn3\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/></svg>Nazovi 095 800 8133</a></div>",
+      "css": ".ds-band{background:var(--ink,#231f20);padding:24px;} .ds-btn3{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 24px;border-radius:var(--r-btn,12px);font:700 1.05rem/1.1 var(--text,\"Red Hat Text\",system-ui,sans-serif);font-variant-numeric:tabular-nums;text-decoration:none;border:1px solid var(--ink,#231f20);cursor:pointer;transition:background-color .18s cubic-bezier(.16,1,.3,1),transform .12s cubic-bezier(.16,1,.3,1);background:var(--on-ink,#f1efec);color:var(--ink,#231f20);border-color:var(--on-ink,#f1efec);} .ds-btn3:hover{background:#fff;} .ds-btn3:active{transform:translateY(1px) scale(.985);} .ds-btn3:focus-visible{outline:3px solid var(--on-ink,#f1efec);outline-offset:3px;}"
+    },
+    {
+      "name": "Choice Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Radio chip in the price picker; checked fills ink.",
+      "html": "<div class=\"ds-chips\"><label class=\"ds-chip\"><input type=\"radio\" name=\"ds-s\" checked><span>Mali</span></label><label class=\"ds-chip\"><input type=\"radio\" name=\"ds-s\"><span>Srednji</span></label><label class=\"ds-chip\"><input type=\"radio\" name=\"ds-s\"><span>Kovrčava <small>npr. pudlica</small></span></label></div>",
+      "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:8px;font-family:var(--text,\"Red Hat Text\",system-ui,sans-serif);} .ds-chip{position:relative;} .ds-chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;} .ds-chip span{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:var(--r-pill,999px);border:1px solid #00000033;font-weight:700;color:var(--ink,#231f20);transition:background-color .2s cubic-bezier(.16,1,.3,1),color .2s cubic-bezier(.16,1,.3,1),border-color .2s;} .ds-chip span small{font-weight:500;color:var(--muted,#5e5a5b);} .ds-chip:hover span{border-color:var(--ink,#231f20);} .ds-chip input:checked+span{background:var(--ink,#231f20);border-color:var(--ink,#231f20);color:var(--on-ink,#f1efec);} .ds-chip input:checked+span small{color:var(--on-ink-muted,#f1efecbf);} .ds-chip input:focus-visible+span{outline:3px solid var(--ink,#231f20);outline-offset:3px;}"
+    },
+    {
+      "name": "Language Pill",
+      "kind": "nav",
+      "refersTo": "lang-pill",
+      "description": "HR | EN pill; the ink indicator slides under the current language.",
+      "html": "<nav class=\"ds-lang\"><span class=\"ds-ind\"></span><a href=\"#\" aria-current=\"page\">HR</a><a href=\"#\">EN</a></nav>",
+      "css": ".ds-lang{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;border:1px solid #0000001f;border-radius:999px;padding:3px;font:700 .85rem/1.55 var(--text,\"Red Hat Text\",system-ui,sans-serif);isolation:isolate;color:var(--ink,#231f20);} .ds-lang a{position:relative;text-align:center;text-decoration:none;padding:8px 16px;border-radius:999px;color:var(--muted,#5e5a5b);transition:color .25s cubic-bezier(.16,1,.3,1);} .ds-lang a[aria-current]{color:var(--on-ink,#f1efec);} .ds-lang a:focus-visible{outline:3px solid var(--ink,#231f20);outline-offset:3px;} .ds-ind{position:absolute;z-index:-1;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;background:var(--ink,#231f20);transition:transform .32s cubic-bezier(.16,1,.3,1);} .ds-lang:has(a:last-child[aria-current]) .ds-ind{transform:translateX(100%);}"
+    },
+    {
+      "name": "Price Result",
+      "kind": "card",
+      "refersTo": "result-card",
+      "description": "Flat Kamen card with ink border: choice, approximate amount, call. Amount shown as the unconfirmed dash, as shipped.",
+      "html": "<div class=\"ds-result\"><span class=\"ds-what\">Mali pas, duga dlaka</span><span class=\"ds-amt\">— €</span><p class=\"ds-fine\">Okvirna cijena. Točnu potvrđujemo kad vidimo psa, jer ovisi i o stanju dlake.</p><a class=\"ds-rbtn\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/></svg>Nazovi za termin</a></div>",
+      "css": ".ds-result{display:grid;gap:12px;padding:24px;border-radius:var(--r-btn,12px);border:1px solid var(--ink,#231f20);background:var(--base,#f1efec);color:var(--ink,#231f20);font:400 1rem/1.55 var(--text,\"Red Hat Text\",system-ui,sans-serif);max-width:620px;} .ds-what{font-weight:700;} .ds-amt{font:900 2.2rem/1 var(--display,\"Red Hat Display\",system-ui,sans-serif);font-variant-numeric:tabular-nums;} .ds-fine{font-size:.9rem;color:var(--muted,#5e5a5b);max-width:46ch;margin:0;} .ds-rbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 24px;border-radius:var(--r-btn,12px);font:700 1.05rem/1.1 var(--text,\"Red Hat Text\",system-ui,sans-serif);font-variant-numeric:tabular-nums;text-decoration:none;border:1px solid var(--ink,#231f20);cursor:pointer;transition:background-color .18s cubic-bezier(.16,1,.3,1),transform .12s cubic-bezier(.16,1,.3,1);justify-self:start;background:var(--ink,#231f20);color:var(--on-ink,#f1efec);} .ds-rbtn:hover{background:var(--ink-hover,#3a3435);} .ds-rbtn:active{transform:translateY(1px) scale(.985);} .ds-rbtn:focus-visible{outline:3px solid var(--ink,#231f20);outline-offset:3px;}"
+    },
+    {
+      "name": "FAQ Row",
+      "kind": "custom",
+      "refersTo": "faq",
+      "description": "Native details row with hairline and rotating plus icon.",
+      "html": "<details class=\"ds-faq\"><summary>Kako naručiti termin?<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></summary><p>Nazovite na 095 800 8133 i dogovorit ćemo termin.</p></details>",
+      "css": ".ds-faq{border-bottom:1px solid #0000001f;max-width:720px;font:400 1rem/1.55 var(--text,\"Red Hat Text\",system-ui,sans-serif);color:var(--ink,#231f20);} .ds-faq summary{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:16px;font-weight:700;cursor:pointer;list-style:none;} .ds-faq summary::-webkit-details-marker{display:none;} .ds-faq summary:focus-visible{outline:3px solid var(--ink,#231f20);outline-offset:3px;} .ds-faq svg{flex:none;transition:transform .25s cubic-bezier(.16,1,.3,1);} .ds-faq[open] svg{transform:rotate(45deg);} .ds-faq p{padding-bottom:16px;margin:0;color:var(--muted,#5e5a5b);}"
+    },
+    {
+      "name": "Call FAB",
+      "kind": "button",
+      "refersTo": "call-fab",
+      "description": "Mobile-only floating call button; the one element with a shadow.",
+      "html": "<a class=\"ds-fab\" href=\"#\" aria-label=\"Nazovi\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/></svg></a>",
+      "css": ".ds-fab{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--ink,#231f20);color:var(--on-ink,#f1efec);box-shadow:0 6px 18px -6px #231f2080;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .3s cubic-bezier(.16,1,.3,1);} .ds-fab:active{transform:scale(.94);} .ds-fab:focus-visible{outline:3px solid var(--ink,#231f20);outline-offset:3px;}"
+    },
+    {
+      "name": "Ink Splash",
+      "kind": "custom",
+      "refersTo": "splash",
+      "description": "Signature: seeded ink blob with droplets and four paw pads beside a section heading (static frame of the seeded output from js/main.js).",
+      "html": "<h2 class=\"ds-shead\">Odaberi <span class=\"ds-brush\">svog psa</span><svg class=\"ds-splash\" viewBox=\"-35 -30 70 60\" aria-hidden=\"true\"><path d=\"M22.8,-1.8Q32.4,0.0 24.4,2.2Q16.4,4.4 15.7,6.5Q15.0,8.6 13.3,10.1Q11.6,11.6 9.5,12.1Q7.3,12.6 5.4,12.9Q3.5,13.2 1.8,14.8Q0.0,16.4 -1.8,15.0Q-3.6,13.5 -6.2,14.3Q-8.7,15.1 -10.8,13.9Q-12.8,12.8 -13.2,10.3Q-13.5,7.8 -22.8,8.2Q-32.2,8.6 -32.9,4.3Q-33.7,0.0 -23.4,-1.8Q-13.2,-3.5 -21.7,-10.5Q-30.2,-17.5 -20.4,-14.0Q-10.5,-10.5 -9.8,-13.1Q-9.0,-15.6 -6.4,-14.7Q-3.7,-13.8 -1.8,-15.3Q-0.0,-16.8 4.6,-25.6Q9.2,-34.4 8.2,-23.5Q7.2,-12.5 13.9,-16.5Q20.5,-20.5 17.3,-14.3Q14.1,-8.1 13.6,-5.8Q13.2,-3.5 22.8,-1.8Z\" fill=\"var(--ink)\"/><circle cx=\"-18.8\" cy=\"22.2\" r=\"2.4\" fill=\"var(--ink)\"/><circle cx=\"-12.9\" cy=\"-29.1\" r=\"2.2\" fill=\"var(--ink)\"/><circle cx=\"-18.7\" cy=\"21.6\" r=\"2.2\" fill=\"var(--ink)\"/><circle cx=\"-18.8\" cy=\"23.9\" r=\"1.6\" fill=\"var(--ink)\"/><circle cx=\"25.7\" cy=\"15.0\" r=\"2.4\" fill=\"var(--ink)\"/><circle cx=\"13.3\" cy=\"27.9\" r=\"1.7\" fill=\"var(--ink)\"/><ellipse cx=\"-8\" cy=\"-5\" rx=\"2.6\" ry=\"3.4\" fill=\"var(--teal)\"/><ellipse cx=\"-2\" cy=\"-10\" rx=\"2.6\" ry=\"3.4\" fill=\"var(--yellow)\"/><ellipse cx=\"5\" cy=\"-9\" rx=\"2.6\" ry=\"3.4\" fill=\"var(--orange)\"/><ellipse cx=\"9\" cy=\"-3\" rx=\"2.6\" ry=\"3.4\" fill=\"var(--red)\"/><path d=\"M-6,6 Q0,-2 6,6 Q8,11 0,10 Q-8,11 -6,6Z\" fill=\"var(--grey)\"/></svg></h2>",
+      "css": ".ds-shead{position:relative;display:inline-block;padding-right:72px;margin:24px 0 0;font:900 1.45rem/1.1 var(--display,\"Red Hat Display\",system-ui,sans-serif);color:var(--ink,#231f20);} .ds-brush{font-family:var(--brush,\"Caveat Brush\",cursive);font-weight:400;font-size:1.22em;line-height:.8;} .ds-splash{position:absolute;right:0;top:-22px;width:64px;height:56px;overflow:visible;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The grooming table is the stage",
+    "overview": "Every photo in the salon shows a dog on the same black rubber table. The system takes that table as its one structural idea: on the first screen the table at the bottom of the photo fades into a solid ink band, and the headline and the call action sit on that band. Everything below is a calm Kamen page printed in the logo's ink, the way the logo itself is a black-and-white mark with one small burst of colour in the paw.\n\nDensity follows the \"Ritam\" rhythm: information sections are tight and practical (service rows, price choices, hours), photo sections get far more air. The tone is playful neighbourhood warmth, carried by the ink splash with its paw pads and by a single brushed word in a headline, never by decoration spread across the page. It is explicitly not a luxury spa: no gold, no soft pastels, no glossy depth.\n\nMotion is \"Razigrano\" but disciplined: one focal moment per splash (ink lands, droplets fly out, pads stamp in), a one-time gallery reveal, and quick tactile feedback on controls, all on one ease-out curve with no bounce. The page is complete without JavaScript; animation only adds the entrance.",
+    "keyCharacteristics": [
+      "Kamen ground with logo ink for text, buttons, hairlines and the hero band.",
+      "Paw colours only inside splashes and tiny marks, always as a group like the paw.",
+      "Red Hat Display 900 headlines; Caveat Brush on one or two headline words.",
+      "Soft corners (12px buttons, pills), 1px hairlines, flat surfaces.",
+      "Real salon photos, graded once in the file; gallery runs edge to edge.",
+      "One ease curve, `cubic-bezier(.16, 1, .3, 1)`, everywhere."
+    ],
+    "rules": [
+      {
+        "name": "The Paw Ration Rule",
+        "body": "Each paw colour covers about 2–3% of the page at most. Full strength only in splashes, dots and thin marks; tints (paw colour mixed into Kamen, up to 45%) only for small tags. Paw colours are never text and never a large surface.",
+        "section": "colors"
+      },
+      {
+        "name": "The Whole Paw Rule",
+        "body": "Paw colours arrive together, as the four pads of one paw. A single paw colour on its own as a decorative block is off-system.",
+        "section": "colors"
+      },
+      {
+        "name": "The Logo As Is Rule",
+        "body": "The logo PNG is used unchanged on Kamen with `mix-blend-mode: multiply` so its white background drops out.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Brush Rule",
+        "body": "Caveat Brush appears only inside a headline, on one or two words, at most once per screen. Never in body text, buttons, prices or navigation.",
+        "section": "typography"
+      },
+      {
+        "name": "The Single Heavy Weight Rule",
+        "body": "Display type is always 900; hierarchy comes from size and the weight jump to 400/700 text, not from intermediate display weights.",
+        "section": "typography"
+      },
+      {
+        "name": "The Rhythm Rule",
+        "body": "Information is dense, photos breathe: never give an information section photo-section padding, or the reverse.",
+        "section": "layout"
+      },
+      {
+        "name": "The One Float Rule",
+        "body": "Only the element that physically floats above the page (the call FAB) casts a shadow. Cards, results, chips and photos stay flat.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep Kamen (`#f1efec`) as the ground everywhere; ink carries text, buttons, lines and the hero band.",
+      "Do put paw colours only in splashes, the star, link and hover lines, and small tints up to 45%.",
+      "Do use Red Hat Display 900 for headings and keep Caveat Brush to one or two headline words, once per screen.",
+      "Do give photo sections 96px / 160px of padding and information sections 48px / 64px.",
+      "Do use 12px corners on buttons and cards, 8px on contained photos, pills for tags and choices.",
+      "Do use `cubic-bezier(.16, 1, .3, 1)` for every transition and animation, and give every animation a reduced-motion path.",
+      "Do bake the photo grade into the file and record its provenance next to it.",
+      "Do keep content fully visible without JavaScript; animations only add the entrance.",
+      "Do draw focus as a 3px ink outline offset 3px, switching to Kamen on the ink band."
+    ],
+    "donts": [
+      "Don't use paw colours as text, as a button fill, or as a large surface (the price result stays Kamen).",
+      "Don't add shadows to cards, chips, photos or buttons; the call FAB is the only floating element.",
+      "Don't use pure white as a ground; it exists only as the light button's hover.",
+      "Don't use Caveat Brush in body text, buttons, prices or navigation.",
+      "Don't add bounce, elastic or shake motion, or animate a splash more than once.",
+      "Don't use emoji or glyph icons; use 2px line SVGs.",
+      "Don't show generated or stock dogs; AI is allowed only as a labelled, temporary extension of a real salon photo.",
+      "Don't carry the pitch placeholders (`.tbd`, `.tbd-note`, `.tbd-box`) into the published site or new surfaces."
+    ]
+  }
+}

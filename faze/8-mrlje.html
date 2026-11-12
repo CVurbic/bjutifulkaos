@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dorada · Mrlje</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --base: #f1efec; --ink: #231f20; --muted: #5e5a5b; --grey: #9a999b; --on-ink: #f1efec;
+          --teal: #65c4b8; --yellow: #f7c57a; --orange: #ed8663; --red: #d55d4e;
+          --display: "Red Hat Display", system-ui, sans-serif; --text: "Red Hat Text", system-ui, sans-serif; --brush: "Caveat Brush", cursive; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--base); color: var(--ink); font: 400 1rem/1.55 var(--text); padding: 40px 16px 80px; }
+  main { max-width: 1040px; margin: 0 auto; display: grid; gap: 56px; }
+  h1 { font: 900 2.35rem/1.05 var(--display); margin-bottom: 12px; }
+  h2 { font: 900 1.45rem/1.1 var(--display); margin-bottom: 6px; }
+  .brush { font-family: var(--brush); font-weight: 400; font-size: 1.22em; line-height: .8; }
+  p { max-width: 62ch; color: var(--muted); }
+  .ref { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+  .ref .crop { width: 180px; height: 160px; border-radius: 8px; background: #fff url(../resursi/logo.png) -330px -335px / 871px 746px no-repeat; border: 1px solid #0000001f; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .cell { width: 112px; height: 112px; display: grid; place-items: center; border-radius: 8px; border: 1px solid #0000001f; }
+  .cell.dark { background: var(--ink); border-color: var(--ink); }
+  .cell svg { width: 96px; height: 96px; overflow: visible; }
+  .ctx { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; align-items: center; }
+  .shead { position: relative; display: inline-block; padding-right: 72px; font: 900 1.9rem/1.1 var(--display); }
+  .shead svg { position: absolute; right: 0; top: -22px; width: 64px; height: 56px; overflow: visible; }
+  .band { background: var(--ink); color: var(--on-ink); padding: 28px 24px; border-radius: 8px; position: relative; flex: 1 1 320px; }
+  .band svg { position: absolute; right: 24px; top: -26px; width: 64px; height: 56px; overflow: visible; }
+  .band b { font: 900 1.6rem/1.1 var(--display); }
+  button { font: inherit; padding: 8px 14px; border-radius: 12px; border: 1px solid var(--ink); background: transparent; cursor: pointer; font-weight: 700; }
+  .demo { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; align-items: center; }
+  .demo svg { width: 180px; height: 180px; overflow: visible; }
+  .demo .dk { background: var(--ink); border-radius: 8px; padding: 10px; }
+  .demo [data-goo] .ink { filter: url(#goo); }
+  label { display: inline-flex; gap: 6px; align-items: center; font-weight: 700; }
+  button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="goo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="1.6" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"/></filter></svg>
+<main>
+  <section>
+    <h1>Dorada: mrlje</h1>
+    <p>Mrlja u logu nije zvijezda sa šiljcima: ima okruglo središte, zaobljene "prste" koji se stanjuju i završavaju kapljicom, i odvojene okrugle kapi okolo. Tri varijante tog pravila, svaka mrlja drugačija (generirana iz broja), sa šapom kao u logu.</p>
+    <div class="ref" style="margin-top:16px">
+      <div class="crop" role="img" aria-label="Mrlja iz loga"></div>
+      <span class="muted">← mrlja iz loga, za usporedbu</span>
+      <button id="again">↻ Nove mrlje</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Animacija: kap koja pljusne (A + B)</h2>
+    <p>Kap padne, udari i raširi se: središte se razlije, prsti izrastu prema van, kapljice odlete, a na kraju se utisne šapa. "Tekući" filtar spaja dijelove dok se šire, pa izgleda kao prava tinta, a ne kao sličice koje se povećavaju.</p>
+    <div class="ref" style="margin-top:16px"><button id="play">▶ Pusti ponovno</button><label><input type="checkbox" id="goo" checked> tekući filtar</label><label><input type="checkbox" id="slow"> usporeno (3×)</label></div>
+    <div class="demo"><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg><div class="dk"><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg></div></div>
+  </section>
+
+  <section data-style="logo">
+    <h2>A · Kao logo</h2>
+    <p>6–9 debelih zaobljenih prstiju srednje duljine, kapljice na krajevima, nekoliko odvojenih kapi. Najbliže logu.</p>
+    <div class="row"></div>
+    <div class="ctx"><h3 class="shead">Odaberi <span class="brush">svog psa</span><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg></h3>
+      <div class="band"><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg><b>Šišanje i njega pasa</b></div></div>
+  </section>
+
+  <section data-style="pljusak">
+    <h2>B · Pljusak</h2>
+    <p>10–14 kratkih, debelih prstiju i sitnih kapi uokolo. Više "kaosa", gušće.</p>
+    <div class="row"></div>
+    <div class="ctx"><h3 class="shead">Odaberi <span class="brush">svog psa</span><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg></h3>
+      <div class="band"><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg><b>Šišanje i njega pasa</b></div></div>
+  </section>
+
+  <section data-style="ab">
+    <h2>A + B · Kombinacija</h2>
+    <p>5–7 debelih prstiju kao u logu, a između njih kratki zaobljeni izdanci i više sitnih kapi okolo. Oblik loga s malo više "pljuska".</p>
+    <div class="row"></div>
+    <div class="ctx"><h3 class="shead">Odaberi <span class="brush">svog psa</span><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg></h3>
+      <div class="band"><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg><b>Šišanje i njega pasa</b></div></div>
+  </section>
+
+  <section data-style="kapi">
+    <h2>C · Duge kapi</h2>
+    <p>4–6 prstiju, duži i tanji pri vrhu, s velikim kapljicama na kraju, plus jedna izdužena kap u letu. Najrazigranije, najviše pokreta.</p>
+    <div class="row"></div>
+    <div class="ctx"><h3 class="shead">Odaberi <span class="brush">svog psa</span><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg></h3>
+      <div class="band"><svg viewBox="-60 -60 120 120" aria-hidden="true"></svg><b>Šišanje i njega pasa</b></div></div>
+  </section>
+</main>
+
+<script>
+  // Lobed ink splat after the logo: wobbly core + necked "fingers" ending in bulbs + loose drops + paw.
+  const rng = s => () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const STYLES = {
+    logo:    { fingers: [6, 9],   len: [.25, .6],  base: [.55, .85], neck: [.28, .42], bulb: [.18, .28], drops: [3, 6],  dropR: [.07, .16], streak: 0 },
+    pljusak: { fingers: [10, 14], len: [.15, .35], base: [.45, .65], neck: [.3, .45],  bulb: [.14, .22], drops: [8, 12], dropR: [.04, .1],  streak: 0 },
+    ab:      { sets: [{ fingers: [5, 7], len: [.3, .6], base: [.55, .85], neck: [.28, .42], bulb: [.18, .28] },
+                      { fingers: [5, 8], len: [.1, .26], base: [.4, .6], neck: [.3, .45], bulb: [.12, .18] }],
+               drops: [7, 11], dropR: [.04, .14], streak: 0 },
+    kapi:    { fingers: [4, 6],   len: [.5, .9],   base: [.55, .8],  neck: [.16, .24], bulb: [.22, .32], drops: [2, 4],  dropR: [.08, .18], streak: 1 },
+  };
+  const f = v => v.toFixed(1);
+  function splat(seed, s, ink, paw = true) {
+    const r = rng(seed), between = ([a, b]) => a + r() * (b - a), R = 30;
+    let out = '';
+    // Core: smooth wobble from two low-frequency sines.
+    const p1 = r() * 6.28, p2 = r() * 6.28, n = 36, pts = [];
+    for (let i = 0; i < n; i++) { const a = i / n * 6.283, k = 1 + .06 * Math.sin(3 * a + p1) + .05 * Math.sin(5 * a + p2); pts.push([Math.cos(a) * R * k, Math.sin(a) * R * k]); }
+    let d = 'M' + pts.map(p => p.map(f).join(',')).join('L') + 'Z';
+    out += `<g class="ink" fill="${ink}"><circle class="fall" r="6" opacity="0"/><path class="core" d="${d}"/>`;
+    // Fingers at uneven angles.
+    // A style may combine several finger sets (A+B: long A fingers with short B stubs in between).
+    const start0 = r() * 6.28;
+    for (const [k, fs_] of (s.sets || [s]).entries()) {
+    const count = Math.round(between(fs_.fingers)), start = start0 + k * Math.PI / count;
+    for (let i = 0; i < count; i++) {
+      const a = start + i / count * 6.283 + (r() - .5) * (6.283 / count) * .8;
+      const L = R * between(fs_.len), w = R * between(fs_.base) / 2, nw = R * between(fs_.neck) / 2, b = R * between(fs_.bulb);
+      // Drawn along +x and rotated into place, so a finger can grow outward from its base.
+      const r0 = R * .85, r1 = R + L, P = (x, y) => f(x) + ',' + f(y);
+      out += `<g transform="rotate(${f(a * 57.2958)})"><g class="fg" data-r0="${f(r0)}"><path d="M${P(r0, -w)} Q${P(R + L * .35, -nw * 1.1)} ${P(r1, -nw)} L${P(r1, nw)} Q${P(R + L * .35, nw * 1.1)} ${P(r0, w)}Z"/><circle cx="${f(r1 + b * .6)}" cy="0" r="${f(b)}"/></g></g>`;
+    }
+    }
+    // Loose drops.
+    const drops = Math.round(between(s.drops));
+    for (let i = 0; i < drops; i++) { const a = r() * 6.283, dist = R * (1.5 + r() * .9 + (s === STYLES.kapi ? .3 : 0)); out += `<circle class="drop" data-x="${f(Math.cos(a) * dist)}" data-y="${f(Math.sin(a) * dist)}" cx="${f(Math.cos(a) * dist)}" cy="${f(Math.sin(a) * dist)}" r="${f(R * between(s.dropR))}"/>`; }
+    if (s.streak) { const a = r() * 6.283, dist = R * 2.1; out += `<ellipse cx="${f(Math.cos(a) * dist)}" cy="${f(Math.sin(a) * dist)}" rx="${f(R * .22)}" ry="${f(R * .1)}" transform="rotate(${f(a * 57.3)} ${f(Math.cos(a) * dist)} ${f(Math.sin(a) * dist)})"/>`; }
+    out += `</g>`;
+    // Paw as in the logo: four toes on an arc + palm.
+    if (paw) {
+      const C = ['var(--teal)', 'var(--yellow)', 'var(--orange)', 'var(--red)'], tilt = (r() - .5) * 30;
+      out += `<g class="paw" transform="rotate(${f(tilt)}) scale(1.3)">`;
+      // Paw print: four separate toes on a symmetric arc above a three-lobed palm pad.
+      [-54, -18, 18, 54].forEach((deg, i) => { const a = (deg - 90) * Math.PI / 180, x = Math.cos(a) * 16, y = Math.sin(a) * 16 + 7;
+        out += `<g class="pad"><ellipse cx="${f(x)}" cy="${f(y)}" rx="4" ry="5.4" transform="rotate(${deg} ${f(x)} ${f(y)})" fill="${C[i]}"/></g>`; });
+      out += `<path class="pad" d="M-11,10 Q-11,1 -4,1.5 Q0,0 4,1.5 Q11,1 11,10 Q12,17 6.5,17.5 Q3,16.5 0,18.5 Q-3,16.5 -6.5,17.5 Q-12,17 -11,10Z" fill="var(--grey)"/></g>`;
+    }
+    return out;
+  }
+  let base = 11;
+  function render() {
+    document.querySelectorAll('[data-style]').forEach((sec, k) => {
+      const s = STYLES[sec.dataset.style];
+      sec.querySelector('.row').innerHTML = Array.from({ length: 8 }, (_, i) => {
+        const dark = i >= 6, seed = base + k * 1000 + i * 137;
+        return `<div class="cell${dark ? ' dark' : ''}"><svg viewBox="-60 -60 120 120" aria-hidden="true">${splat(seed, s, dark ? 'var(--on-ink)' : 'var(--ink)')}</svg></div>`;
+      }).join('');
+      sec.querySelector('.shead svg').innerHTML = splat(base + k * 1000 + 999, s, 'var(--ink)');
+      sec.querySelector('.band svg').innerHTML = splat(base + k * 1000 + 555, s, 'var(--on-ink)');
+    });
+  }
+  const EASE = 'cubic-bezier(.16, 1, .3, 1)';
+  function drop(svg, k = 1) {
+    const o = (t, extra = {}) => ({ easing: EASE, fill: 'backwards', ...extra, duration: t * k });
+    svg.querySelector('.fall').animate([{ opacity: 1, transform: 'translateY(-80px) scale(.8, 1.3)' }, { opacity: 1, transform: 'translateY(0) scale(1.4, .7)', offset: .92 }, { opacity: 0, transform: 'scale(2)' }], { duration: 260 * k, easing: 'cubic-bezier(.5, 0, .9, .6)' });
+    const T = 230 * k;
+    svg.querySelector('.core').animate([{ transform: 'scale(.15)' }, { transform: 'scale(1.08)', offset: .6 }, { transform: 'scale(1)' }], o(420, { delay: T }));
+    svg.querySelectorAll('.fg').forEach(g => { const r0 = g.dataset.r0;
+      g.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1.08)', offset: .7 }, { transform: 'none' }],
+        o(460, { delay: T + 60 * k + Math.random() * 90 * k })); });
+    svg.querySelectorAll('.drop').forEach(d => d.animate([{ transform: 'translate(' + (-d.dataset.x) + 'px,' + (-d.dataset.y) + 'px) scale(.4)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+      o(520, { delay: T + 80 * k + Math.random() * 60 * k })));
+    svg.querySelectorAll('.pad').forEach((p, i) => p.animate([{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1.15)', opacity: 1, offset: .7 }, { transform: 'scale(1)' }], o(260, { delay: T + 380 * k + i * 70 * k })));
+  }
+  function demo() {
+    const k = document.getElementById('slow').checked ? 3 : 1, goo = document.getElementById('goo').checked;
+    document.querySelectorAll('.demo svg').forEach((svg, i) => {
+      svg.innerHTML = splat(base + 7000 + i * 31, STYLES.ab, svg.closest('.dk') ? 'var(--on-ink)' : 'var(--ink)');
+      // Only animated parts get a transform origin, each from its own box: elements that carry a transform
+      // attribute (paw group, toe rotations, finger rotation) are left alone so the paw keeps its shape.
+      svg.querySelectorAll('.fall, .core, .drop, .pad').forEach(e => { e.style.transformBox = 'fill-box'; e.style.transformOrigin = 'center'; });
+      svg.querySelectorAll('.fg').forEach(e => { e.style.transformBox = 'fill-box'; e.style.transformOrigin = 'left center'; });
+      svg.toggleAttribute('data-goo', goo);
+      setTimeout(() => drop(svg, k), i * 180 * k);
+    });
+  }
+  document.getElementById('play').onclick = demo;
+  document.getElementById('goo').onchange = demo;
+  document.getElementById('slow').onchange = demo;
+  document.getElementById('again').onclick = () => { base = 1 + Math.floor(Math.random() * 1e6); render(); };
+  render(); demo();
+</script>
+</body>
+</html>
