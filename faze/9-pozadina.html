@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faza 9 · Pozadina</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --base: #f1efec; --ink: #231f20; --muted: #5e5a5b; --on-ink: #f1efec;
+          --display: "Red Hat Display", system-ui, sans-serif; --text: "Red Hat Text", system-ui, sans-serif; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body { display: grid; grid-template-rows: auto 1fr; background: #d9d6d2; color: var(--ink); font: 400 .95rem/1.4 var(--text); }
+  header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; padding: 10px 16px; background: var(--base); border-bottom: 1px solid #0000001f; }
+  h1 { font: 900 1.1rem/1 var(--display); }
+  .seg { display: inline-flex; border: 1px solid var(--ink); border-radius: 12px; overflow: hidden; }
+  .seg button { font: 700 .9rem/1 var(--text); padding: 10px 14px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+  .seg button + button { border-left: 1px solid var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
+  .seg button:focus-visible { outline: 3px solid var(--ink); outline-offset: -5px; }
+  #desc { color: var(--muted); flex: 1 1 320px; }
+  iframe { width: 100%; height: 100%; border: 0; background: var(--base); justify-self: center; }
+  body.mob iframe { width: 390px; border-inline: 1px solid #00000033; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Faza 9 · Pozadina</h1>
+  <div class="seg" id="ver" role="group" aria-label="Verzija">
+    <button data-v="0">Sada</button><button data-v="a">A · Tiho</button><button data-v="b">B · Sekcije</button><button data-v="c">C · Tinta</button>
+  </div>
+  <div class="seg" id="dev" role="group" aria-label="Širina">
+    <button data-d="">Desktop</button><button data-d="mob">Mobitel</button>
+  </div>
+  <p id="desc"></p>
+</header>
+<iframe id="page" src="../index.html" title="Stranica s odabranom pozadinom"></iframe>
+
+<script>
+// Mockup only: loads the real page and layers a background variant on top. Nothing here ships.
+const DESC = {
+  0: 'Stranica kakva je danas: sve na Kamenu.',
+  a: 'Samo mrlje: tri velike, blijede (7 % tinte), napola izvan ruba. Podloga svugdje Kamen.',
+  b: 'Mrlje iz A + tamniji Kamen na Cjeniku i Čestim pitanjima + Kontakt i podnožje u tinti.',
+  c: 'Pune crne mrlje, manje, u donjim kutovima foto-sekcija + Kontakt i podnožje u tinti.',
+};
+
+// Ink splat: a blobby body, tapered arms ending in bulbs, flung droplets. Blur + alpha threshold ("goo")
+// melts the pieces into one liquid shape, so necks thin out and joins round off like real ink.
+const rng = s => () => (s = (s * 16807) % 2147483647) / 2147483647;
+function splat(seed, fill, opacity) {
+  const r = rng(seed), f = v => v.toFixed(1), P = (a, d) => [Math.cos(a) * d, Math.sin(a) * d];
+  const dot = (x, y, R) => `<circle cx="${f(x)}" cy="${f(y)}" r="${f(R)}"/>`;
+  let goo = `<ellipse rx="${f(30 + r() * 6)}" ry="${f(24 + r() * 6)}" transform="rotate(${f(r() * 180)})"/>`, drops = '';
+  for (let i = 0; i < 6; i++) goo += dot(...P(r() * 6.28, 12 + r() * 12), 17 + r() * 10);
+  const n = 9 + Math.floor(r() * 4);
+  for (let i = 0; i < n; i++) {
+    // Three kinds of arm: fat lobe hugging the body, medium finger, long thin runner with a heavy drop at the end.
+    const a = (i + (r() - .5) * .8) / n * 6.28, kind = r() < .3 ? 0 : r() < .55 ? 1 : 2;
+    const L = [38 + r() * 8, 52 + r() * 14, 72 + r() * 26][kind], wb = [13, 10, 9][kind] + r() * 4;
+    const wn = [6, 3.4, 2.5][kind] + r() * 1.4, rb = [9, 7, 7.5][kind] + r() * 4.5;
+    const [bx, by] = P(a, 22), [tx, ty] = P(a + (r() - .5) * .34, L);
+    const bend = (r() - .5) * L * .5, [cx, cy] = [(bx + tx) / 2 + Math.cos(a + 1.57) * bend, (by + ty) / 2 + Math.sin(a + 1.57) * bend];
+    // Circles along a bent path: thick at the body, pinched in the neck, swelling into a teardrop.
+    for (let j = 0; j <= 16; j++) {
+      const t = j / 16, u = 1 - t, x = u * u * bx + 2 * u * t * cx + t * t * tx, y = u * u * by + 2 * u * t * cy + t * t * ty;
+      goo += dot(x, y, wn + (wb - wn) * u * u * u + (rb - wn) * Math.exp(-(((t - .93) / .13) ** 2)));
+    }
+    if (kind && r() < .55) drops += dot(...P(a + (r() - .5) * .25, Math.min(104, L + rb + 5 + r() * 14)), 1.5 + r() * 3.2);
+  }
+  for (let i = 0; i < 3; i++) drops += dot(...P(r() * 6.28, 62 + r() * 40), 1.2 + r() * 2.2);
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-112 -112 224 224"><filter id="g" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.2"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 24 -10"/></filter><g fill="${fill}" opacity="${opacity}"><g filter="url(#g)">${goo}</g>${drops}</g></svg>`;
+}
+const bg = (...a) => `url("data:image/svg+xml,${encodeURIComponent(splat(...a))}")`;
+
+const CSS = `
+  :root { --base-2: color-mix(in srgb, var(--ink) 6%, var(--base)); }
+  section.photo, #kontakt { background-repeat: no-repeat; background-size: var(--blot); }
+  [data-bg=b] :is(#cijene, section[aria-labelledby="faq-t"]) { background-color: var(--base-2); }
+  [data-bg=b] :is(.result, .chips input:not(:checked) + span) { background-color: var(--base); }
+  :is([data-bg=b], [data-bg=c]) :is(#kontakt, .site-foot) { background-color: var(--ink); color: var(--on-ink); }
+  :is([data-bg=b], [data-bg=c]) :is(#kontakt, .site-foot) :focus-visible { outline-color: var(--on-ink); }
+  :is([data-bg=b], [data-bg=c]) #kontakt .splash :is(.blob, circle) { fill: var(--on-ink); }
+  :is([data-bg=b], [data-bg=c]) #kontakt .btn-primary { background: var(--on-ink); color: var(--ink); border-color: var(--on-ink); }
+  :is([data-bg=b], [data-bg=c]) #kontakt .btn-secondary { color: var(--on-ink); border-color: var(--on-ink); }
+  :is([data-bg=b], [data-bg=c]) #kontakt .btn-secondary:hover { background: color-mix(in srgb, var(--on-ink) 12%, var(--ink)); }
+  :is([data-bg=b], [data-bg=c]) body { padding-bottom: 0; }
+  :is([data-bg=b], [data-bg=c]) .site-foot { color: var(--on-ink-muted); border-top-color: #f1efec1f; padding-bottom: 88px; }
+  @media (min-width: 900px) { :is([data-bg=b], [data-bg=c]) .site-foot { padding-bottom: var(--group); } }
+  :is([data-bg=b], [data-bg=c]) .fab { box-shadow: 0 0 0 1px var(--base), 0 6px 18px -6px #231f2080; }
+`;
+// Per photo section: [seed, faint position, solid position]. Faint ones sit in the top/bottom padding;
+// solid ones only in bottom corners, where there is no text to cover.
+const SPOTS = [
+  [11, 'right calc(var(--blot) * -.36) top calc(var(--blot) * -.14)', 'right calc(var(--blot) * -.42) bottom calc(var(--blot) * -.46)'],
+  [29, 'left calc(var(--blot) * -.4) top calc(var(--blot) * -.22)', 'left calc(var(--blot) * -.44) bottom calc(var(--blot) * -.46)'],
+  [53, 'right calc(var(--blot) * -.3) bottom calc(var(--blot) * -.3)', 'right calc(var(--blot) * -.4) bottom calc(var(--blot) * -.48)'],
+];
+
+const frame = document.getElementById('page');
+let ver = new URLSearchParams(location.search).get('v') || 'a';
+function apply() {
+  const doc = frame.contentDocument;
+  if (!doc || !doc.body) return;
+  if (!doc.getElementById('bg-mock')) doc.head.insertAdjacentHTML('beforeend', `<style id="bg-mock">${CSS}</style>`);
+  doc.documentElement.dataset.bg = ver;
+  const solid = ver === 'c', on = ver !== '0';
+  doc.querySelectorAll('section.photo').forEach((s, k) => {
+    const [seed, faint, hard] = SPOTS[k] || SPOTS[0];
+    s.style.setProperty('--blot', solid ? 'clamp(190px, 28vw, 360px)' : 'clamp(300px, 50vw, 680px)');
+    s.style.backgroundImage = on ? bg(seed, '#231f20', solid ? 1 : .07) : '';
+    s.style.backgroundPosition = solid ? hard : faint;
+  });
+  const k = doc.getElementById('kontakt');
+  if (k) {
+    k.style.setProperty('--blot', 'clamp(240px, 34vw, 420px)');
+    k.style.backgroundImage = ver === 'b' || solid ? bg(71, '#f1efec', .07) : '';
+    k.style.backgroundPosition = 'right calc(var(--blot) * -.3) top calc(var(--blot) * -.35)';
+  }
+  document.querySelectorAll('#ver button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === ver));
+  document.getElementById('desc').textContent = DESC[ver];
+}
+frame.addEventListener('load', apply);
+document.getElementById('ver').addEventListener('click', e => { if (e.target.dataset.v) { ver = e.target.dataset.v; apply(); } });
+document.getElementById('dev').addEventListener('click', e => {
+  if (e.target.dataset.d == null) return;
+  document.body.className = e.target.dataset.d;
+  document.querySelectorAll('#dev button').forEach(b => b.setAttribute('aria-pressed', b === e.target));
+});
+document.querySelector('#dev button').setAttribute('aria-pressed', true);
+apply();
+</script>
+</body>
+</html>

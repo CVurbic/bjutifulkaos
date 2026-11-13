@@ -74,6 +74,15 @@
         ],
         "createdAt": "2026-11-10T15:56:46.538Z",
         "reason": "Claude: faze/ pages are phase specimens showing rejected options side by side (user picked Red Hat + Caveat Brush in phase 2); not shipping surfaces"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "faze/9-pozadina.html"
+        ],
+        "createdAt": "2026-11-13T12:16:38.847Z",
+        "reason": "Locked brand base Kamen #f1efec from faze/ODLUKE.md phase 1 (sampled from logo); mockup must match the real page"
       }
     ]
   }

@@ -3,6 +3,7 @@
 :root {
   /* Colour (phase 1) */
   --base: #f1efec;
+  --base-2: color-mix(in srgb, var(--ink) 6%, var(--base)); /* deeper Kamen for .tone sections (phase 9, B) */
   --ink: #231f20;
   --ink-hover: #3a3435;
   --muted: #5e5a5b;
@@ -51,7 +52,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 html { scroll-behavior: smooth; scrollbar-color: var(--grey) var(--base); -webkit-text-size-adjust: 100%; }
-body { background: var(--base); color: var(--ink); font: 400 1rem/1.55 var(--text); accent-color: var(--ink); caret-color: var(--ink); padding-bottom: 88px; }
+body { background: var(--base); color: var(--ink); font: 400 1rem/1.55 var(--text); accent-color: var(--ink); caret-color: var(--ink); }
 ::selection { background: color-mix(in srgb, var(--yellow) 45%, var(--base)); color: var(--ink); }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-underline-offset: 4px; text-decoration-thickness: 2px; text-decoration-color: var(--teal); }
@@ -68,6 +69,7 @@ section.photo { padding-block: var(--section-photo); }
 h1, h2 { font-family: var(--display); font-weight: 900; text-wrap: balance; }
 h1 { font-size: 2.35rem; line-height: 1.02; letter-spacing: -.01em; }
 h2 { font-size: 1.45rem; line-height: 1.1; margin-bottom: var(--group); }
+h3 { font: 900 1.15rem/1.2 var(--display); margin-bottom: var(--inner); }
 @media (min-width: 900px) { h1 { font-size: 3.4rem; } h2 { font-size: 1.9rem; } }
 .brush { font-family: var(--brush); font-weight: 400; font-size: 1.22em; line-height: .8; letter-spacing: 0; }
 p { max-width: var(--col); text-wrap: pretty; }
@@ -132,7 +134,7 @@ p { max-width: var(--col); text-wrap: pretty; }
 .band :focus-visible { outline-color: var(--on-ink); }
 .band .where { color: var(--on-ink-muted); margin-top: var(--inner); }
 .band .actions { display: grid; gap: 14px; justify-items: start; }
-.band .rating { color: var(--on-ink); font-weight: 700; display: inline-flex; align-items: center; gap: 8px; text-decoration-color: var(--teal); }
+.band .rating { color: var(--on-ink); font-weight: 700; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration-color: var(--teal); }
 .band .rating span { font-weight: 500; color: var(--on-ink-muted); }
 .star { width: 18px; height: 18px; fill: var(--yellow); stroke: none; }
 @media (min-width: 900px) {
@@ -151,14 +153,14 @@ p { max-width: var(--col); text-wrap: pretty; }
 .shead { position: relative; display: inline-block; padding-right: 72px; }
 .shead .splash { position: absolute; right: 0; top: -22px; }
 
-/* Services */
-.services { display: grid; gap: var(--group); }
+/* Services and prices: the list of what we do next to the price picker. */
+.services { display: grid; gap: 48px; margin-top: var(--group); }
 .svc { display: grid; gap: 0; max-width: 640px; }
 .svc li { list-style: none; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding-block: var(--inner); border-bottom: var(--line); }
 .svc ul { padding: 0; }
 .svc b { font-weight: 700; }
 .svc .sub { grid-column: 1 / -1; font-size: .9rem; color: var(--muted); }
-@media (min-width: 900px) { .services { grid-template-columns: 1fr 1.4fr; gap: 48px; } }
+@media (min-width: 900px) { .services { grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; } }
 
 /* Price picker (phase 5) */
 .calc { display: grid; gap: var(--group); max-width: 620px; }
@@ -181,8 +183,9 @@ p { max-width: var(--col); text-wrap: pretty; }
 .result .btn { justify-self: start; }
 
 /* Before / after (phase 5, A) */
-.ba-wrap { display: grid; gap: var(--group); }
-@media (min-width: 900px) { .ba-wrap { grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; } }
+.pick { display: grid; gap: var(--group); }
+@media (min-width: 900px) { .pick { grid-template-columns: minmax(0, 440px) 1fr; gap: 48px; align-items: start; } }
+.pick .lead { margin-top: var(--inner); }
 .ba { position: relative; width: 100%; max-width: 440px; aspect-ratio: 4 / 5; border-radius: var(--r-photo); overflow: hidden; user-select: none; touch-action: pan-y; }
 .ba > img, .ba .before { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ba .before { border-radius: 0; padding: 0 75% 24px 8px; place-items: end center; }
@@ -193,12 +196,17 @@ p { max-width: var(--col); text-wrap: pretty; }
 .ba .tag { position: absolute; top: 10px; padding: 4px 10px; border-radius: var(--r-pill); background: var(--base); font-size: .85rem; font-weight: 700; pointer-events: none; }
 .ba:has(input:focus-visible) { outline: var(--focus); outline-offset: 3px; }
 
-/* Gallery: edge to edge (phase 3, C) */
+/* Gallery: thumbnails pick the dog shown in the before / after slider. */
 .gal-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 24px; margin-bottom: var(--group); }
 .gal-head h2 { margin-bottom: 0; }
-.gal { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; padding: 0; list-style: none; }
-@media (min-width: 900px) { .gal { grid-template-columns: repeat(3, 1fr); } }
-.gal li { overflow: hidden; }
+.dogs { border: 0; padding: 0; min-width: 0; }
+.dogs legend { font-weight: 700; margin-bottom: 10px; }
+.gal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0; list-style: none; }
+.gal li { position: relative; overflow: hidden; border-radius: var(--r-photo); }
+.gal label { display: block; cursor: pointer; }
+.gal input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; z-index: 1; }
+.gal li:has(input:checked) { outline: 3px solid var(--ink); outline-offset: 2px; }
+.gal li:has(input:focus-visible) { outline: 3px solid var(--ink); outline-offset: 5px; }
 .gal img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 22%; transition: transform .5s var(--ease); }
 .gal li:hover img { transform: scale(1.03); }
 .gal .top0 img { object-position: 50% 0%; }
@@ -228,14 +236,14 @@ p { max-width: var(--col); text-wrap: pretty; }
 .contact { display: grid; gap: var(--group); }
 .contact dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 24px; }
 .contact dt { font-weight: 700; }
-.contact .maplink { display: inline-flex; align-items: center; gap: 8px; margin-top: var(--group); font-weight: 700; }
+.contact .maplink { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: var(--inner); font-weight: 700; }
 .contact .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 @media (min-width: 900px) { .contact { grid-template-columns: 1fr 1fr; align-items: end; gap: 64px; } }
 
 /* Footer */
 .site-foot { border-top: var(--line); padding-block: var(--group); font-size: .85rem; color: var(--muted); }
-.site-foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
-.site-foot a { display: inline-flex; align-items: center; gap: 6px; }
+.site-foot .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; }
+.site-foot a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
 
 /* Call FAB (phase 5, C) */
 .fab { position: fixed; right: 16px; bottom: max(16px, env(safe-area-inset-bottom)); z-index: var(--z-fab); width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
@@ -244,6 +252,26 @@ p { max-width: var(--col); text-wrap: pretty; }
 .fab:active { transform: scale(.94); }
 .fab.out { transform: scale(.6); opacity: 0; pointer-events: none; }
 @media (min-width: 900px) { .fab { display: none; } } /* phase 5: round call button is the mobile pattern */
+
+/* Background (phase 9, B): tones already in the palette break up the Kamen. No paw colours as fills (phase 1). */
+/* Deeper Kamen for two information sections; cards and chips stay on plain Kamen so they lift off it. */
+.tone { background-color: var(--base-2); }
+.tone .result, .tone .chips span { background-color: var(--base); }
+/* Ink: contact and footer close the page the way the hero band opens it. */
+.dark, .site-foot { background-color: var(--ink); color: var(--on-ink); }
+.dark :focus-visible, .site-foot :focus-visible { outline-color: var(--on-ink); }
+.dark .splash .blob, .dark .splash circle { fill: var(--on-ink); }
+.dark .btn-primary { background: var(--on-ink); color: var(--ink); border-color: var(--on-ink); }
+.dark .btn-primary:hover { background: #fff; }
+.dark .btn-secondary { color: var(--on-ink); border-color: var(--on-ink); }
+.dark .btn-secondary:hover { background: color-mix(in srgb, var(--on-ink) 12%, var(--ink)); }
+.site-foot { color: var(--on-ink-muted); border-top-color: #f1efec1f; padding-bottom: 88px; } /* 88px: room for the call button */
+@media (min-width: 900px) { .site-foot { padding-bottom: var(--group); } }
+.fab { box-shadow: 0 0 0 1px var(--base), 0 6px 18px -6px #231f2080; } /* Kamen ring: visible on ink, gone on Kamen */
+/* Big faint ink splat bleeding off the edge; js/main.js draws it from the data-blot seed. */
+[data-blot] { --blot: clamp(300px, 50vw, 680px); background-repeat: no-repeat; background-size: var(--blot); background-position: right calc(var(--blot) * -.36) top calc(var(--blot) * -.14); }
+[data-blot]:not(#galerija) { background-position: right calc(var(--blot) * -.3) bottom calc(var(--blot) * -.3); }
+.dark[data-blot] { --blot: clamp(240px, 34vw, 420px); background-position: right calc(var(--blot) * -.3) top calc(var(--blot) * -.35); }
 
 @media (prefers-reduced-motion: reduce) {
   .btn, .fab, .lang .ind, .lang a, .gal img, .faq summary .icon, .chips span { transition: none; }

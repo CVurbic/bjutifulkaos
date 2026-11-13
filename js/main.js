@@ -42,17 +42,52 @@ function splat(svg) {
 }
 document.querySelectorAll('[data-splash]').forEach((svg, k) => drawSplash(svg, 7 + k * 97));
 
-// Gallery reveal: top to bottom, once.
-function revealGallery(list) {
-  [...list.children].forEach((c, i) => c.animate(reduced ? [{ opacity: 0 }, { opacity: 1 }] : [{ clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0 0)' }],
-    { duration: reduced ? 250 : 620, delay: Math.min(i * 70, 350), easing: EASE, fill: 'backwards' }));
+// --- Background splats (phase 9): a blobby body, arms of three kinds (fat lobe, finger, long runner with a heavy
+// drop) and flung droplets. Blur + alpha threshold melts the circles into one liquid shape, like real ink.
+function splatSvg(seed, fill) {
+  const r = rng(seed), f = v => v.toFixed(1), P = (a, d) => [Math.cos(a) * d, Math.sin(a) * d];
+  const dot = (x, y, R) => `<circle cx="${f(x)}" cy="${f(y)}" r="${f(R)}"/>`;
+  let goo = `<ellipse rx="${f(30 + r() * 6)}" ry="${f(24 + r() * 6)}" transform="rotate(${f(r() * 180)})"/>`, drops = '';
+  for (let i = 0; i < 6; i++) goo += dot(...P(r() * 6.28, 12 + r() * 12), 17 + r() * 10);
+  const n = 9 + Math.floor(r() * 4);
+  for (let i = 0; i < n; i++) {
+    const a = (i + (r() - .5) * .8) / n * 6.28, kind = r() < .3 ? 0 : r() < .55 ? 1 : 2;
+    const L = [38 + r() * 8, 52 + r() * 14, 72 + r() * 26][kind], wb = [13, 10, 9][kind] + r() * 4;
+    const wn = [6, 3.4, 2.5][kind] + r() * 1.4, rb = [9, 7, 7.5][kind] + r() * 4.5;
+    const [bx, by] = P(a, 22), [tx, ty] = P(a + (r() - .5) * .34, L);
+    const bend = (r() - .5) * L * .5, cx = (bx + tx) / 2 + Math.cos(a + 1.57) * bend, cy = (by + ty) / 2 + Math.sin(a + 1.57) * bend;
+    for (let k = 0; k <= 16; k++) { // thick at the body, pinched in the neck, swelling into a teardrop
+      const t = k / 16, u = 1 - t;
+      goo += dot(u * u * bx + 2 * u * t * cx + t * t * tx, u * u * by + 2 * u * t * cy + t * t * ty, wn + (wb - wn) * u * u * u + (rb - wn) * Math.exp(-(((t - .93) / .13) ** 2)));
+    }
+    if (kind && r() < .55) drops += dot(...P(a + (r() - .5) * .25, Math.min(104, L + rb + 5 + r() * 14)), 1.5 + r() * 3.2);
+  }
+  for (let i = 0; i < 3; i++) drops += dot(...P(r() * 6.28, 62 + r() * 40), 1.2 + r() * 2.2);
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-112 -112 224 224"><filter id="g" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.2"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 24 -10"/></filter><g fill="${fill}" opacity=".07"><g filter="url(#g)">${goo}</g>${drops}</g></svg>`;
+}
+// Size and position live in css ([data-blot]); ink on Kamen, Kamen on ink.
+document.querySelectorAll('[data-blot]').forEach(s =>
+  s.style.backgroundImage = `url("data:image/svg+xml,${encodeURIComponent(splatSvg(+s.dataset.blot, s.matches('.dark') ? '#f1efec' : '#231f20'))}")`);
+
+// Gallery reveal: top to bottom, once. Built paused, so photos hold the hidden first frame
+// until the gallery scrolls in (otherwise they show, vanish, then wipe in).
+function galleryReveal(list) {
+  return [...list.children].map((c, i) => {
+    const a = c.animate(reduced ? [{ opacity: 0 }, { opacity: 1 }] : [{ clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0 0)' }],
+      { duration: reduced ? 250 : 620, delay: Math.min(i * 70, 350), easing: EASE, fill: 'backwards' });
+    a.pause();
+    return a;
+  });
 }
 if ('IntersectionObserver' in window) {
+  const reveals = new Map([...document.querySelectorAll('.gal')].map(g => [g, galleryReveal(g)]));
+  // Splash waits for 40% (it is small); the gallery is tall, so it starts at 15%.
   const io = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
+    const gal = reveals.get(e.target);
+    if (e.intersectionRatio < (gal ? .15 : .4)) return;
     io.unobserve(e.target);
-    e.target.matches('[data-splash]') ? splat(e.target) : revealGallery(e.target);
-  }), { threshold: .4 });
+    gal ? gal.forEach(a => a.play()) : splat(e.target);
+  }), { threshold: [.15, .4] });
   document.querySelectorAll('[data-splash], .gal').forEach(el => io.observe(el));
 
   // Call button arrives once the hero call actions scroll away.
@@ -79,6 +114,13 @@ if (calc) calc.addEventListener('change', () => {
   res.querySelector('.what').textContent = `${size.dataset.label}, ${coat.dataset.label}`;
   res.querySelector('.amt').textContent = p == null ? '— €' : Array.isArray(p) ? `${p[0]}–${p[1]} €` : `${p} €`;
 });
+
+// --- Dog picker: the chosen thumbnail becomes the "after" photo in the slider.
+// ponytail: "before" stays one placeholder; when the owner sends pairs, add data-before to each input and swap it here.
+document.querySelectorAll('.dogs').forEach(d => d.addEventListener('change', e => {
+  const t = e.target.nextElementSibling, after = document.querySelector('.ba .after');
+  after.srcset = t.srcset; after.src = t.src.replace('-480', '-960'); after.alt = t.alt;
+}));
 
 // --- Before / after slider
 document.querySelectorAll('.ba input').forEach(i => i.addEventListener('input', () => i.parentElement.style.setProperty('--x', i.value + '%')));

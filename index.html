@@ -6,13 +6,26 @@
 <title>Bjutiful Kaos · Šišanje i njega pasa u Trnju, Zagreb</title>
 <meta name="description" content="Salon za šišanje i njegu pasa u Ul. grada Vukovara 237A, Zagreb. Radnim danom 08–20 h, vikendom po dogovoru. Nazovite 095 800 8133.">
 <meta name="theme-color" content="#f1efec">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bjutiful Kaos">
+<meta property="og:title" content="Bjutiful Kaos · Šišanje i njega pasa u Trnju, Zagreb">
+<meta property="og:description" content="Salon za šišanje i njegu pasa u Ul. grada Vukovara 237A, Zagreb. Radnim danom 08–20 h, vikendom po dogovoru. Nazovite 095 800 8133.">
+<meta property="og:locale" content="hr_HR">
+<meta property="og:locale:alternate" content="en_GB">
+<!-- ponytail: og:url, og:image, canonical and JSON-LD url/image need absolute URLs; add once the domain is known. -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Bjutiful Kaos","telephone":"+385958008133",
+"address":{"@type":"PostalAddress","streetAddress":"Ul. grada Vukovara 237A","postalCode":"10000","addressLocality":"Zagreb","addressCountry":"HR"},
+"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"20:00"},
+"sameAs":["https://www.instagram.com/bjutiful_kaos/"]}
+</script>
 <link rel="alternate" hreflang="hr" href="./">
 <link rel="alternate" hreflang="en" href="en/">
 <link rel="preload" href="fonts/8vIf7wUr0m80wwYf0QCXZzYzUoTK8RZQvRd-D1NYbsWRQk8z-A.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/RrQXbohi_ic6B3yVSzGBrMxQaKct.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
 <link rel="stylesheet" href="css/styles.css">
-<link rel="icon" href="resursi/logo.png">
+<link rel="icon" href="img/favicon.png">
 <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -29,9 +42,9 @@
 
 <header class="site-head">
   <div class="wrap">
-    <a class="logo" href="./" aria-label="Bjutiful Kaos, početna"><img src="resursi/logo.png" width="871" height="746" alt="Bjutiful Kaos, salon za šišanje i njegu pasa"></a>
+    <a class="logo" href="./" aria-label="Bjutiful Kaos, početna"><img src="img/logo.png" width="208" height="178" alt="Bjutiful Kaos, salon za šišanje i njegu pasa"></a>
     <nav class="site-nav" aria-label="Glavna navigacija">
-      <a href="#usluge">Usluge</a><a href="#cijene">Cijene</a><a href="#galerija">Galerija</a><a href="#kontakt">Kontakt</a>
+      <a href="#usluge">Usluge i cijene</a><a href="#galerija">Galerija</a><a href="#kontakt">Kontakt</a>
     </nav>
     <nav class="lang" aria-label="Jezik"><span class="ind" aria-hidden="true"></span><a href="./" aria-current="page" lang="hr" hreflang="hr">HR</a><a href="en/" lang="en" hreflang="en">EN</a></nav>
   </div>
@@ -64,83 +77,77 @@
     </div>
   </section>
 
-  <section id="usluge" aria-labelledby="usluge-t">
-    <div class="wrap services">
-      <div>
-        <h2 id="usluge-t">Usluge</h2>
-        <p class="lead">Šišanje i njega pasa svih veličina. Popis i trajanje potvrđuje vlasnica.</p>
-      </div>
-      <div class="svc">
-        <ul>
-          <li><b>Šišanje</b></li>
-          <li><b>Njega</b></li>
-          <li><b class="tbd">Kupanje i sušenje</b><span class="tbd-note">potvrditi</span></li>
-          <li><b class="tbd">Raščešljavanje i čvorovi</b><span class="tbd-note">potvrditi</span></li>
-          <li><b class="tbd">Rezanje noktiju</b><span class="tbd-note">potvrditi</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="cijene" aria-labelledby="cijene-t">
+  <section id="usluge" class="tone" aria-labelledby="usluge-t">
     <div class="wrap">
-      <h2 class="shead" id="cijene-t">Odaberi <span class="brush">svog psa</span><svg class="splash" data-splash viewBox="-35 -30 70 60" aria-hidden="true"></svg></h2>
-      <form class="calc" onsubmit="return false">
-        <fieldset><legend>Koliki je vaš pas?</legend>
-          <div class="chips">
-            <label><input type="radio" name="size" value="mali" data-label="Mali pas"><span>Mali <small class="tbd">do — kg</small></span></label>
-            <label><input type="radio" name="size" value="srednji" data-label="Srednji pas"><span>Srednji <small class="tbd">— kg</small></span></label>
-            <label><input type="radio" name="size" value="veliki" data-label="Veliki pas"><span>Veliki <small class="tbd">od — kg</small></span></label>
-          </div>
-        </fieldset>
-        <fieldset><legend>Kakva mu je dlaka?</legend>
-          <div class="chips">
-            <label><input type="radio" name="coat" value="kratka" data-label="kratka dlaka"><span>Kratka</span></label>
-            <label><input type="radio" name="coat" value="duga" data-label="duga dlaka"><span>Duga</span></label>
-            <label><input type="radio" name="coat" value="kovrcava" data-label="kovrčava dlaka"><span>Kovrčava <small>npr. pudlica</small></span></label>
-          </div>
-        </fieldset>
-        <div class="result" aria-live="polite">
-          <span class="what">Odaberite veličinu i dlaku</span>
-          <span class="amt">— €</span>
-          <p class="fine">Okvirna cijena. Točnu potvrđujemo kad vidimo psa, jer ovisi i o stanju dlake. <span class="tbd-note">iznosi: potvrditi</span></p>
-          <a class="btn btn-primary" href="tel:+385958008133"><svg class="icon"><use href="#i-phone"/></svg>Nazovi za termin</a>
+      <h2 class="shead" id="usluge-t">Usluge <span class="brush">i cijene</span><svg class="splash" data-splash viewBox="-35 -30 70 60" aria-hidden="true"></svg></h2>
+      <p class="lead">Šišanje i njega pasa svih veličina. Popis i trajanje potvrđuje vlasnica.</p>
+      <div class="services">
+        <div class="svc">
+          <h3>Što radimo</h3>
+          <ul>
+            <li><b>Šišanje</b></li>
+            <li><b>Njega</b></li>
+            <li><b class="tbd">Kupanje i sušenje</b><span class="tbd-note">potvrditi</span></li>
+            <li><b class="tbd">Raščešljavanje i čvorovi</b><span class="tbd-note">potvrditi</span></li>
+            <li><b class="tbd">Rezanje noktiju</b><span class="tbd-note">potvrditi</span></li>
+          </ul>
         </div>
-      </form>
+        <form class="calc" id="cijene" onsubmit="return false">
+          <h3>Odaberi svog psa</h3>
+          <fieldset><legend>Koliki je vaš pas?</legend>
+            <div class="chips">
+              <label><input type="radio" name="size" value="mali" data-label="Mali pas"><span>Mali <small class="tbd">do — kg</small></span></label>
+              <label><input type="radio" name="size" value="srednji" data-label="Srednji pas"><span>Srednji <small class="tbd">— kg</small></span></label>
+              <label><input type="radio" name="size" value="veliki" data-label="Veliki pas"><span>Veliki <small class="tbd">od — kg</small></span></label>
+            </div>
+          </fieldset>
+          <fieldset><legend>Kakva mu je dlaka?</legend>
+            <div class="chips">
+              <label><input type="radio" name="coat" value="kratka" data-label="kratka dlaka"><span>Kratka</span></label>
+              <label><input type="radio" name="coat" value="duga" data-label="duga dlaka"><span>Duga</span></label>
+              <label><input type="radio" name="coat" value="kovrcava" data-label="kovrčava dlaka"><span>Kovrčava <small>npr. pudlica</small></span></label>
+            </div>
+          </fieldset>
+          <div class="result" aria-live="polite">
+            <span class="what">Odaberite veličinu i dlaku</span>
+            <span class="amt">— €</span>
+            <p class="fine">Okvirna cijena. Točnu potvrđujemo kad vidimo psa, jer ovisi i o stanju dlake. <span class="tbd-note">iznosi: potvrditi</span></p>
+            <a class="btn btn-primary" href="tel:+385958008133"><svg class="icon"><use href="#i-phone"/></svg>Nazovi za termin</a>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 
-  <section class="photo" aria-labelledby="ba-t">
-    <div class="wrap ba-wrap">
-      <div>
-        <h2 id="ba-t">Prije i poslije</h2>
-        <p class="lead">Povucite crtu preko fotke. <span class="tbd-note">fotke "prije": od vlasnice</span></p>
-      </div>
-      <div class="ba" style="--x:25%">
-        <div class="before tbd-box">Fotka "prije"</div>
-        <img class="after" src="img/pas-03-960.webp" srcset="img/pas-03-480.webp 480w, img/pas-03-960.webp 960w" sizes="(min-width: 900px) 440px, 100vw" width="1440" height="1575" loading="lazy" alt="Marelasta pudlica nakon šišanja">
-        <span class="tag" style="left:10px">prije</span><span class="tag" style="right:10px">poslije</span><span class="handle"></span>
-        <input type="range" min="0" max="100" value="25" aria-label="Usporedba prije i poslije">
-      </div>
-    </div>
-  </section>
-
-  <section id="galerija" class="photo" aria-labelledby="gal-t">
+  <section id="galerija" class="photo" data-blot="11" aria-labelledby="gal-t">
     <div class="wrap gal-head">
-      <h2 class="shead" id="gal-t">Iz salona<svg class="splash" data-splash viewBox="-35 -30 70 60" aria-hidden="true"></svg></h2>
+      <h2 class="shead" id="gal-t">Prije <span class="brush">i poslije</span><svg class="splash" data-splash viewBox="-35 -30 70 60" aria-hidden="true"></svg></h2>
       <span><a href="https://www.instagram.com/bjutiful_kaos/">Više na Instagramu</a> <span class="tbd-note">dozvola za Instagram fotke: potvrditi</span></span>
     </div>
-    <ul class="gal">
-      <li class="top0"><img src="img/pas-02-480.webp" srcset="img/pas-02-480.webp 480w, img/pas-02-960.webp 960w" sizes="(min-width: 900px) 33vw, 50vw" width="1440" height="1920" loading="lazy" alt="Pudlica s crvenom mašnom nakon šišanja"></li>
-      <li><img src="img/pas-04-480.webp" srcset="img/pas-04-480.webp 480w, img/pas-04-960.webp 960w" sizes="(min-width: 900px) 33vw, 50vw" width="1440" height="1440" loading="lazy" alt="Riđi čupavi pas na stolu za šišanje"></li>
-      <li><img src="img/pas-05-480.webp" srcset="img/pas-05-480.webp 480w, img/pas-05-960.webp 960w" sizes="(min-width: 900px) 33vw, 50vw" width="1440" height="1503" loading="lazy" alt="Crno-bijeli pas s mašnom nakon šišanja"></li>
-      <li><img src="img/pas-09-480.webp" srcset="img/pas-09-480.webp 480w, img/pas-09-960.webp 960w" sizes="(min-width: 900px) 33vw, 50vw" width="1440" height="1440" loading="lazy" alt="Mali bijeli pas nakon šišanja"></li>
-      <li><img src="img/pas-10-480.webp" srcset="img/pas-10-480.webp 480w, img/pas-10-960.webp 960w" sizes="(min-width: 900px) 33vw, 50vw" width="1440" height="1920" loading="lazy" alt="Crna pudlica nakon šišanja"></li>
-      <li><img src="img/pas-12-480.webp" srcset="img/pas-12-480.webp 480w, img/pas-12-960.webp 960w" sizes="(min-width: 900px) 33vw, 50vw" width="1440" height="1672" loading="lazy" alt="Šnaucer odmara na dekici nakon šišanja"></li>
-    </ul>
+    <div class="wrap pick">
+      <div>
+        <div class="ba" style="--x:25%">
+          <div class="before tbd-box">Fotka "prije"</div>
+          <img class="after" src="img/pas-02-960.webp" srcset="img/pas-02-480.webp 480w, img/pas-02-960.webp 960w" sizes="(min-width: 900px) 440px, 100vw" width="1440" height="1920" loading="lazy" alt="Pudlica s crvenom mašnom nakon šišanja">
+          <span class="tag" style="left:10px">prije</span><span class="tag" style="right:10px">poslije</span><span class="handle"></span>
+          <input type="range" min="0" max="100" value="25" aria-label="Usporedba prije i poslije">
+        </div>
+        <p class="lead">Povucite crtu preko fotke. <span class="tbd-note">fotke "prije": od vlasnice</span></p>
+      </div>
+      <fieldset class="dogs"><legend>Odaberite psa</legend>
+        <ul class="gal">
+          <li><label><input type="radio" name="dog" checked><img src="img/pas-02-480.webp" srcset="img/pas-02-480.webp 480w, img/pas-02-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1920" loading="lazy" alt="Pudlica s crvenom mašnom nakon šišanja"></label></li>
+          <li><label><input type="radio" name="dog"><img src="img/pas-04-480.webp" srcset="img/pas-04-480.webp 480w, img/pas-04-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1440" loading="lazy" alt="Riđi čupavi pas na stolu za šišanje"></label></li>
+          <li><label><input type="radio" name="dog"><img src="img/pas-05-480.webp" srcset="img/pas-05-480.webp 480w, img/pas-05-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1503" loading="lazy" alt="Crno-bijeli pas s mašnom nakon šišanja"></label></li>
+          <li><label><input type="radio" name="dog"><img src="img/pas-09-480.webp" srcset="img/pas-09-480.webp 480w, img/pas-09-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1440" loading="lazy" alt="Mali bijeli pas nakon šišanja"></label></li>
+          <li><label><input type="radio" name="dog"><img src="img/pas-10-480.webp" srcset="img/pas-10-480.webp 480w, img/pas-10-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1920" loading="lazy" alt="Crna pudlica nakon šišanja"></label></li>
+          <li><label><input type="radio" name="dog"><img src="img/pas-12-480.webp" srcset="img/pas-12-480.webp 480w, img/pas-12-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1672" loading="lazy" alt="Šnaucer odmara na dekici nakon šišanja"></label></li>
+        </ul>
+      </fieldset>
+    </div>
   </section>
 
-  <section class="photo" aria-labelledby="owner-t">
+  <section class="photo" data-blot="53" aria-labelledby="owner-t">
     <div class="wrap owner">
       <div class="tbd-box">Fotka vlasnice<br><span class="tbd-note">od vlasnice</span></div>
       <div>
@@ -162,7 +169,7 @@
     </div>
   </section>
 
-  <section aria-labelledby="faq-t">
+  <section class="tone" aria-labelledby="faq-t">
     <div class="wrap faq">
       <h2 id="faq-t">Česta pitanja</h2>
       <details><summary>Kako naručiti termin?<svg class="icon"><use href="#i-plus"/></svg></summary><p>Nazovite na 095 800 8133 i dogovorit ćemo termin.</p></details>
@@ -173,7 +180,7 @@
     </div>
   </section>
 
-  <section id="kontakt" aria-labelledby="kontakt-t">
+  <section id="kontakt" class="dark" data-blot="71" aria-labelledby="kontakt-t">
     <div class="wrap contact">
       <div>
         <h2 class="shead" id="kontakt-t">Dođite <span class="brush">s repom</span><svg class="splash" data-splash viewBox="-35 -30 70 60" aria-hidden="true"></svg></h2>
