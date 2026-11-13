@@ -126,19 +126,20 @@
     </div>
     <div class="wrap pick">
       <div>
-        <div class="ba" style="--x:25%">
+        <div class="ba" style="--x:50%">
           <div class="before tbd-box">"Before" photo</div>
+          <img class="prije" src="../img/pas-02-prije-960.jpg" srcset="../img/pas-02-prije-480.jpg 480w, ../img/pas-02-prije-960.jpg 960w" sizes="(min-width: 900px) 440px, 100vw" width="960" height="1280" loading="lazy" alt="Apricot poodle before the haircut">
           <img class="after" src="../img/pas-02-960.webp" srcset="../img/pas-02-480.webp 480w, ../img/pas-02-960.webp 960w" sizes="(min-width: 900px) 440px, 100vw" width="1440" height="1920" loading="lazy" alt="Poodle with a red bow after a haircut">
           <span class="tag" style="left:10px">before</span><span class="tag" style="right:10px">after</span><span class="handle"></span>
-          <input type="range" min="0" max="100" value="25" aria-label="Before and after comparison">
+          <input type="range" min="0" max="100" value="50" aria-label="Before and after comparison">
         </div>
-        <p class="lead">Drag the line across the photo. <span class="tbd-note">"before" photos: from the owner</span></p>
+        <p class="lead">Drag the line across the photo. <span class="tbd-note">"before" photos: AI example, to replace</span></p>
       </div>
       <fieldset class="dogs"><legend>Choose a dog</legend>
         <ul class="gal">
-          <li><label><input type="radio" name="dog" checked><img src="../img/pas-02-480.webp" srcset="../img/pas-02-480.webp 480w, ../img/pas-02-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1920" loading="lazy" alt="Poodle with a red bow after a haircut"></label></li>
+          <li><label><input type="radio" name="dog" checked data-before="../img/pas-02-prije" data-before-alt="Apricot poodle before the haircut"><img src="../img/pas-02-480.webp" srcset="../img/pas-02-480.webp 480w, ../img/pas-02-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1920" loading="lazy" alt="Poodle with a red bow after a haircut"></label></li>
           <li><label><input type="radio" name="dog"><img src="../img/pas-04-480.webp" srcset="../img/pas-04-480.webp 480w, ../img/pas-04-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1440" loading="lazy" alt="Fluffy ginger dog on the grooming table"></label></li>
-          <li><label><input type="radio" name="dog"><img src="../img/pas-05-480.webp" srcset="../img/pas-05-480.webp 480w, ../img/pas-05-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1503" loading="lazy" alt="Black and white dog with a bow after a haircut"></label></li>
+          <li><label><input type="radio" name="dog" data-before="../img/pas-05-prije" data-before-alt="Black and white dog before the haircut"><img src="../img/pas-05-480.webp" srcset="../img/pas-05-480.webp 480w, ../img/pas-05-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1503" loading="lazy" alt="Black and white dog with a bow after a haircut"></label></li>
           <li><label><input type="radio" name="dog"><img src="../img/pas-09-480.webp" srcset="../img/pas-09-480.webp 480w, ../img/pas-09-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1440" loading="lazy" alt="Small white dog after a haircut"></label></li>
           <li><label><input type="radio" name="dog"><img src="../img/pas-10-480.webp" srcset="../img/pas-10-480.webp 480w, ../img/pas-10-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1920" loading="lazy" alt="Black poodle after a haircut"></label></li>
           <li><label><input type="radio" name="dog"><img src="../img/pas-12-480.webp" srcset="../img/pas-12-480.webp 480w, ../img/pas-12-960.webp 960w" sizes="(min-width: 900px) 190px, 30vw" width="1440" height="1672" loading="lazy" alt="Schnauzer resting on a blanket after a haircut"></label></li>

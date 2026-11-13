@@ -38,7 +38,7 @@ function splat(svg) {
   if (reduced) return svg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 });
   svg.querySelector('.blob').animate([{ transform: 'scale(.15)', opacity: 0 }, { transform: 'scale(1.06)', opacity: 1, offset: .55 }, { transform: 'scale(1)' }], { duration: 560, easing: EASE, fill: 'backwards' });
   svg.querySelectorAll('.drop').forEach((d, i) => d.animate([{ transform: `translate(${-d.dataset.x}px,${-d.dataset.y}px) scale(.3)`, opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 520, delay: 90 + i * 25, easing: EASE, fill: 'backwards' }));
-  svg.querySelectorAll('.pad').forEach((p, i) => p.animate([{ transform: 'scale(0)' }, { transform: 'scale(1)' }], { duration: 260, delay: 330 + i * 70, easing: EASE, fill: 'backwards' }));
+  svg.querySelectorAll('.pad').forEach((p, i) => p.animate([{ transform: 'scale(.6)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }], { duration: 260, delay: 330 + i * 70, easing: EASE, fill: 'backwards' }));
 }
 document.querySelectorAll('[data-splash]').forEach((svg, k) => drawSplash(svg, 7 + k * 97));
 
@@ -93,6 +93,16 @@ if ('IntersectionObserver' in window) {
   // Call button arrives once the hero call actions scroll away.
   const fab = document.querySelector('.fab'), heroCta = document.querySelector('.hero .actions');
   if (fab && heroCta) new IntersectionObserver(([e]) => fab.classList.toggle('out', e.isIntersecting)).observe(heroCta);
+  // Slider hint: the line slides out and back once, so it reads as draggable.
+  const ba = document.querySelector('.ba');
+  if (ba && !reduced) {
+    const o = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      o.disconnect();
+      ba.animate([{ '--x': '50%' }, { '--x': '62%', offset: .45 }, { '--x': '50%' }], { duration: 800, delay: 400, easing: 'ease-in-out' });
+    }, { threshold: .6 });
+    o.observe(ba);
+  }
 }
 
 // --- Language pill: slide the indicator, then follow the link.
@@ -112,15 +122,29 @@ if (calc) calc.addEventListener('change', () => {
   if (!size || !coat) return;
   const res = calc.querySelector('.result'), p = PRICES[size.value]?.[coat.value];
   res.querySelector('.what').textContent = `${size.dataset.label}, ${coat.dataset.label}`;
-  res.querySelector('.amt').textContent = p == null ? '— €' : Array.isArray(p) ? `${p[0]}–${p[1]} €` : `${p} €`;
+  const amt = res.querySelector('.amt');
+  amt.textContent = p == null ? '— €' : Array.isArray(p) ? `${p[0]}–${p[1]} €` : `${p} €`;
+  if (p != null) amt.animate(reduced ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 180, easing: EASE });
 });
 
-// --- Dog picker: the chosen thumbnail becomes the "after" photo in the slider.
-// ponytail: "before" stays one placeholder; when the owner sends pairs, add data-before to each input and swap it here.
-document.querySelectorAll('.dogs').forEach(d => d.addEventListener('change', e => {
-  const t = e.target.nextElementSibling, after = document.querySelector('.ba .after');
-  after.srcset = t.srcset; after.src = t.src.replace('-480', '-960'); after.alt = t.alt;
+// --- Dog picker: the chosen thumbnail becomes the "after" photo in the slider; its data-before (path without
+// the -480/-960.jpg tail) becomes the "before" photo. No data-before = the placeholder underneath shows.
+let pickId = 0;
+document.querySelectorAll('.dogs').forEach(d => d.addEventListener('change', async e => {
+  const t = e.target.nextElementSibling, after = document.querySelector('.ba .after'), prije = document.querySelector('.ba .prije'), id = ++pickId, pre = new Image();
+  const b = e.target.dataset.before;
+  pre.srcset = t.srcset; pre.sizes = after.sizes; pre.src = t.src.replace('-480', '-960');
+  await pre.decode().catch(() => {}); // no flash of an empty frame on a slow connection
+  if (id !== pickId) return;
+  after.srcset = t.srcset; after.src = pre.src; after.alt = t.alt;
+  prije.hidden = !b;
+  if (b) { prije.srcset = `${b}-480.jpg 480w, ${b}-960.jpg 960w`; prije.src = `${b}-960.jpg`; prije.alt = e.target.dataset.beforeAlt; }
+  [after, prije].forEach(el => { el.getAnimations().forEach(a => a.cancel()); el.animate(reduced ? [{ opacity: .5 }, { opacity: 1 }] : [{ opacity: .5, filter: 'blur(6px)', transform: 'scale(1.02)' }, { opacity: 1, filter: 'blur(0)', transform: 'none' }], { duration: 240, easing: EASE }); });
+  // Dogs with a real pair: the line sweeps right (all "before") and comes back, showing off the difference.
+  const ba = after.parentElement, x = ba.querySelector('input').value + '%';
+  ba.getAnimations().forEach(a => a.cancel());
+  if (b && !reduced) ba.animate([{ '--x': x }, { '--x': '90%', offset: .5 }, { '--x': x }], { duration: 1100, delay: 120, easing: 'cubic-bezier(.77, 0, .175, 1)' });
 }));
 
 // --- Before / after slider
-document.querySelectorAll('.ba input').forEach(i => i.addEventListener('input', () => i.parentElement.style.setProperty('--x', i.value + '%')));
+document.querySelectorAll('.ba input').forEach(i => i.addEventListener('input', () => { i.parentElement.getAnimations().forEach(a => a.cancel()); i.parentElement.style.setProperty('--x', i.value + '%'); }));
