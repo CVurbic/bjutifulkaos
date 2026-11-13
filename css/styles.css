@@ -218,8 +218,10 @@ p { max-width: var(--col); text-wrap: pretty; }
 
 /* Owner */
 .owner { display: grid; gap: var(--group); }
-.owner .tbd-box { aspect-ratio: 4 / 5; max-width: 240px; }
-@media (min-width: 900px) { .owner .tbd-box { max-width: 360px; } }
+.owner-photo { max-width: 240px; border-radius: var(--r-photo); overflow: hidden; }
+.owner-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 45% 50%; }
+.owner p + p { margin-top: var(--inner); }
+@media (min-width: 900px) { .owner-photo { max-width: 360px; } }
 @media (min-width: 900px) { .owner { grid-template-columns: 360px 1fr; gap: 64px; align-items: center; } }
 
 /* Reviews */

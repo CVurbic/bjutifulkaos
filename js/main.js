@@ -71,8 +71,8 @@ document.querySelectorAll('[data-blot]').forEach(s =>
 
 // Gallery reveal: top to bottom, once. Built paused, so photos hold the hidden first frame
 // until the gallery scrolls in (otherwise they show, vanish, then wipe in).
-function galleryReveal(list) {
-  return [...list.children].map((c, i) => {
+function galleryReveal(els) {
+  return els.map((c, i) => {
     const a = c.animate(reduced ? [{ opacity: 0 }, { opacity: 1 }] : [{ clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0 0)' }],
       { duration: reduced ? 250 : 620, delay: Math.min(i * 70, 350), easing: EASE, fill: 'backwards' });
     a.pause();
@@ -91,7 +91,11 @@ function reviewsReveal(list) {
   });
 }
 if ('IntersectionObserver' in window) {
-  const reveals = new Map([...[...document.querySelectorAll('.gal')].map(g => [g, galleryReveal(g)]), ...[...document.querySelectorAll('.revs')].map(r => [r, reviewsReveal(r)])]);
+  const reveals = new Map([
+    ...[...document.querySelectorAll('.gal')].map(g => [g, galleryReveal([...g.children])]),
+    // Observe the section, not the photo: the photo's own clip-path makes it read as 0% visible.
+    ...[...document.querySelectorAll('.owner')].map(o => [o, galleryReveal([o.querySelector('.owner-photo')])]),
+    ...[...document.querySelectorAll('.revs')].map(r => [r, reviewsReveal(r)])]);
   // Splash waits for 40% (it is small); the gallery is tall, so it starts at 15%.
   const io = new IntersectionObserver(es => es.forEach(e => {
     const gal = reveals.get(e.target);
@@ -99,7 +103,7 @@ if ('IntersectionObserver' in window) {
     io.unobserve(e.target);
     gal ? gal.forEach(a => a.play()) : splat(e.target);
   }), { threshold: [.15, .4] });
-  document.querySelectorAll('[data-splash], .gal, .revs').forEach(el => io.observe(el));
+  document.querySelectorAll('[data-splash], .gal, .owner, .revs').forEach(el => io.observe(el));
 
   // Call button arrives once the hero call actions scroll away.
   const fab = document.querySelector('.fab'), heroCta = document.querySelector('.hero .actions');
