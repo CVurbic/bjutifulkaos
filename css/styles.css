@@ -227,6 +227,15 @@ p { max-width: var(--col); text-wrap: pretty; }
 .score .big { font: 900 3.4rem/1 var(--display); display: inline-flex; align-items: center; gap: 10px; }
 .score .big .star { width: 36px; height: 36px; }
 .score p { margin: 0; }
+.revs { list-style: none; padding: 0; margin: var(--group) 0 0; display: grid; gap: var(--inner); }
+.revs li { display: flex; flex-direction: column; gap: var(--inner); padding: var(--group); border: var(--line); border-radius: var(--r-btn); background: #ffffff59; }
+.revs .stars { display: flex; gap: 2px; }
+.revs .star { width: 16px; height: 16px; transform-origin: 50% 60%; }
+.revs blockquote { margin: 0; font-size: 1.05rem; line-height: 1.5; }
+.revs blockquote p, .revs .who { margin: 0; }
+.revs .who { margin-top: auto; font-weight: 700; font-size: .9rem; color: var(--muted); }
+.rev-note { margin-top: var(--inner); font-size: .85rem; }
+@media (min-width: 900px) { .revs { grid-template-columns: repeat(3, 1fr); gap: var(--group); } }
 
 /* FAQ */
 .faq > * { max-width: 720px; }

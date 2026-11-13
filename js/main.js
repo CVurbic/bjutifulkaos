@@ -79,8 +79,19 @@ function galleryReveal(list) {
     return a;
   });
 }
+// Reviews: cards rise in one after another, then each card's stars pop left to right.
+function reviewsReveal(list) {
+  return [...list.children].flatMap((c, i) => {
+    const d = i * 80;
+    const card = c.animate(reduced ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }],
+      { duration: reduced ? 250 : 520, delay: d, easing: EASE, fill: 'backwards' });
+    const stars = reduced ? [] : [...c.querySelectorAll('.star')].map((s, j) =>
+      s.animate([{ opacity: 0, transform: 'scale(.5)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 260, delay: d + 220 + j * 45, easing: EASE, fill: 'backwards' }));
+    return [card, ...stars].map(a => (a.pause(), a));
+  });
+}
 if ('IntersectionObserver' in window) {
-  const reveals = new Map([...document.querySelectorAll('.gal')].map(g => [g, galleryReveal(g)]));
+  const reveals = new Map([...[...document.querySelectorAll('.gal')].map(g => [g, galleryReveal(g)]), ...[...document.querySelectorAll('.revs')].map(r => [r, reviewsReveal(r)])]);
   // Splash waits for 40% (it is small); the gallery is tall, so it starts at 15%.
   const io = new IntersectionObserver(es => es.forEach(e => {
     const gal = reveals.get(e.target);
@@ -88,7 +99,7 @@ if ('IntersectionObserver' in window) {
     io.unobserve(e.target);
     gal ? gal.forEach(a => a.play()) : splat(e.target);
   }), { threshold: [.15, .4] });
-  document.querySelectorAll('[data-splash], .gal').forEach(el => io.observe(el));
+  document.querySelectorAll('[data-splash], .gal, .revs').forEach(el => io.observe(el));
 
   // Call button arrives once the hero call actions scroll away.
   const fab = document.querySelector('.fab'), heroCta = document.querySelector('.hero .actions');
